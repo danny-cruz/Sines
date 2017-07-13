@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CreateNextLevel : MonoBehaviour {
-	private GameObject NextLevelSuperEasy;
+    private GameObject NextLevelSuperEasy;
 	private GameObject NextLevelEasy;
 	private GameObject NextLevelMedium;
 	private GameObject NextLevelHard;
@@ -49,14 +49,14 @@ public class CreateNextLevel : MonoBehaviour {
 				}
 			}
 
-			if(Score >= 75 && Score < 750){
+			if(Score >= 75 && Score < 450){ 
 
 				NextLevelEasy.transform.position = EndPoint.transform.position;
 				NextLevelEasy.SetActive(true);
 				levelShuffler.LevelEasy++;
 			}
 			
-			if(Score >= 750 && Score < 2000){
+			if(Score >= 450 && Score < 1450){ 
 				
 				if(Easy){
 
@@ -73,7 +73,7 @@ public class CreateNextLevel : MonoBehaviour {
 				}
 			}
 			
-			if(Score >= 2000 && Score < 2750){
+			if(Score >= 1450 && Score < 1750){
 
 				NextLevelMedium.transform.position = EndPoint.transform.position;
 				NextLevelMedium.SetActive(true);
@@ -81,31 +81,32 @@ public class CreateNextLevel : MonoBehaviour {
 				
 			}
 			
-			if(Score >= 2750 && Score < 3250){
+			if(Score >= 1750 && Score < 2750)
+            {
 				if(Hard){
 
-					NextLevelMedium.transform.position = EndPoint.transform.position;
-					NextLevelMedium.SetActive(true);
-					levelShuffler.LevelMedium++;
-				}
+                    NextLevelEasy.transform.position = EndPoint.transform.position;
+                    NextLevelEasy.SetActive(true);
+                    levelShuffler.LevelEasy++;
+                }
 				
 				if(Medium){
 
-					NextLevelEasy.transform.position = EndPoint.transform.position;
-					NextLevelEasy.SetActive(true);
-					levelShuffler.LevelEasy++;
-				}
+                    NextLevelHard.transform.position = EndPoint.transform.position;
+                    NextLevelHard.SetActive(true);
+                    levelShuffler.LevelHard++;
+                }
 				
 				if(Easy){
 				
-					NextLevelHard.transform.position = EndPoint.transform.position;
-					NextLevelHard.SetActive(true);
-					levelShuffler.LevelHard++;
-				}
+                    NextLevelMedium.transform.position = EndPoint.transform.position;
+                    NextLevelMedium.SetActive(true);
+                    levelShuffler.LevelMedium++;
+                }
 				
 			}
 			
-			if(Score >= 3250 && Score < 4500){
+			if(Score >= 2750 && Score < 4500){
 				if(Hard){
 
 					NextLevelMedium.transform.position = EndPoint.transform.position;

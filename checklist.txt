@@ -1,0 +1,4 @@
+1. Touch up each level
+2. Dots/Trails
+3. Finalize UI
+4. Optimize
