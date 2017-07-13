@@ -14,7 +14,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &123964
 GameObject:
   m_ObjectHideFlags: 1
@@ -923,7 +923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2d7edd7b05a984ba8e7d628295dffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevelSuperEasy: {fileID: 0}
   Player: {fileID: 0}
   levelShuffler: {fileID: 0}
   scorecounter: {fileID: 0}

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CreateNextLevel : MonoBehaviour {
-	public GameObject NextLevelSuperEasy;
+	private GameObject NextLevelSuperEasy;
 	private GameObject NextLevelEasy;
 	private GameObject NextLevelMedium;
 	private GameObject NextLevelHard;
