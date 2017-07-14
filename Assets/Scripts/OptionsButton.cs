@@ -8,7 +8,7 @@ public class OptionsButton : MonoBehaviour {
 	public GameObject XButton;
 	public GameObject CircleButton;
 	public GameObject ShadowButton;
-	public GameObject Menu;
+	//public GameObject Menu;
 	public GameObject TargetPoint;
 	public GameObject StartPoint;
 	public float Speed;
@@ -33,8 +33,8 @@ public class OptionsButton : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		MenuRenderer = Menu.GetComponent<SpriteRenderer>();
-		MenuStartColor = MenuRenderer.color;
+		//MenuRenderer = Menu.GetComponent<SpriteRenderer>();
+		//MenuStartColor = MenuRenderer.color;
 		StartScale = new Vector3(CircleButton.transform.localScale.x,CircleButton.transform.localScale.y,CircleButton.transform.localScale.z);
 		TargetScale = new Vector3(-35, -35, 1);
 
@@ -88,7 +88,7 @@ public class OptionsButton : MonoBehaviour {
 	
 
 		if (!Open){
-			MenuRenderer.color = Color.Lerp(MenuRenderer.color, MenuStartColor, Time.deltaTime * 15);
+			//MenuRenderer.color = Color.Lerp(MenuRenderer.color, MenuStartColor, Time.deltaTime * 15);
 		}
 
 		if(Input.GetKeyDown(KeyCode.Escape)){
@@ -134,7 +134,7 @@ public class OptionsButton : MonoBehaviour {
 
 			if(!XDelay){
 				XButton.transform.localScale = Vector3.Lerp(XButton.transform.localScale, new Vector3(1,1,1), Time.deltaTime * 2f * Speed);
-				MenuRenderer.color = Color.Lerp(MenuRenderer.color, Color.white, Time.deltaTime * 5);
+				//MenuRenderer.color = Color.Lerp(MenuRenderer.color, Color.white, Time.deltaTime * 5);
 			}
 
 		

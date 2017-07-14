@@ -2,45 +2,58 @@
 using System.Collections;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
-public class GPG_Leaderboard : MonoBehaviour {
+public class GPG_Leaderboard : MonoBehaviour
+{
 
-	private SpriteRenderer SpriteRend;
-	public Color Gray;
-	private bool SignedIn;
-	private bool Pressed;
-	// Use this for initialization
-	void Start () {
-		SpriteRend = GetComponent<SpriteRenderer>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    private SpriteRenderer SpriteRend;
+    public Color Alpha;
+    public Color ButtonUpColor;
+    public Color ButtonDownColor;
+    private bool SignedIn;
+    private bool Pressed;
+    // Use this for initialization
+    void Start()
+    {
+        SpriteRend = GetComponent<SpriteRenderer>();
+    }
 
-		SignedIn = GPG_SignIn.SignIn;
+    // Update is called once per frame
+    void Update()
+    {
 
-		if(Input.GetButtonUp("Touch")){
-			SpriteRend.color = Color.white;
-		}
-	}
-	
-	void OnMouseOver(){
+        SignedIn = GPG_SignIn.SignIn;
 
-		if(Input.GetButtonDown("Touch")){
-			Pressed = true;
-			SpriteRend.color = Gray;
-		}
+    }
 
-		if(Input.GetButtonUp("Touch")){
-			if(SignedIn){
-				if(Pressed){
-			PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIlu2Nm5MWEAIQBw");
-					Pressed = false;
-				}
-			}
-		}
-	}
+    void OnMouseOver() 
+    {
 
-	void OnMouseExit(){
-		Pressed = false;
-	}
+        if (Input.GetButtonDown("Touch")) {
+            Pressed = true;
+            SpriteRend.color = ButtonDownColor;
+        }
+
+        if (Input.GetButtonUp("Touch"))
+        {
+            if (SignedIn)
+            {
+                if (Pressed)
+                {
+                    PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIlu2Nm5MWEAIQBw");
+                    Pressed = false;
+                    SpriteRend.color = ButtonUpColor;
+                }
+            }
+        }
+    }
+
+    void OnMouseExit()
+    { 
+        if (Pressed)
+        {
+		    Pressed = false;
+            SpriteRend.color = ButtonUpColor;
+        }
+
+    }
 }

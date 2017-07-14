@@ -2,45 +2,57 @@
 using System.Collections;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
-public class GPG_Achievements : MonoBehaviour {
-	public Color Gray;
-	private SpriteRenderer SpriteRend;
+public class GPG_Achievements : MonoBehaviour
+{
+    public Color Alpha;
+    public Color ButtonUpColor;
+    public Color ButtonDownColor;
+
+    private SpriteRenderer SpriteRend;
 	private bool SignedIn;
 	private bool Pressed;
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+    {
 		SpriteRend = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
 		SignedIn = GPG_SignIn.SignIn;
-
-		if(Input.GetButtonUp("Touch")){
-			SpriteRend.color = Color.white;
-		}
 	}
 	
-	void OnMouseOver(){
+	void OnMouseOver()
+    {
 	
-		if(Input.GetButtonDown("Touch")){
-			SpriteRend.color = Gray;
+		if(Input.GetButtonDown("Touch"))
+        {		
 			Pressed = true;
-		}
+            SpriteRend.color = ButtonDownColor;
+        }
 
-		if(Input.GetButtonUp("Touch")){
-			if(Pressed){
-			if(SignedIn){
-			Social.ShowAchievementsUI();
-					Pressed = false;
-				}
+		if(Input.GetButtonUp("Touch"))
+        {
+			if(Pressed)
+            {
+			    if(SignedIn)
+                {
+			        Social.ShowAchievementsUI();
+				    Pressed = false;
+                    SpriteRend.color = ButtonUpColor;
+                }
 			}
 		}
 	}
 
-	void OnMouseExit (){
-		Pressed = false;
-	}
+    void OnMouseExit()
+    {
+        if (Pressed)
+        {
+            Pressed = false;
+            SpriteRend.color = ButtonUpColor;
+        }
+
+    }
 }
