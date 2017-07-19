@@ -46,6 +46,7 @@ public class Controller : MonoBehaviour {
 	private Quaternion RotateVector2;
 	public bool Pause;
 
+
 	public static bool FirstSpin;
 	private float SpeedMod;
 	internal bool SpeedUp;
@@ -54,6 +55,7 @@ public class Controller : MonoBehaviour {
 	void Awake () {
 		Lost = false;
 		FirstSpin = true;
+        Pause = false;
 		Fader = Fade.GetComponent<Fade>();
 		Score = ScoreCount.GetComponent<ScoreCounter>();
 		RotateVector = Quaternion.Euler(0, 0, 125);

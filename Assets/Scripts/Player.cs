@@ -10,12 +10,16 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(!Speed){
+	void Update ()
+    {
+
+		if(!Speed)
+        {
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 1, Time.deltaTime * .5f);
 		}
 
-		if(Speed){
+		if(Speed)
+        {
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 4, Time.deltaTime );
 		}
 	}
@@ -29,7 +33,7 @@ public class Player : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag.Equals("Edge")){
-			Lost = true;
+			//Lost = true;
 		}
 
 		if(other.tag.Equals("Boost")){
