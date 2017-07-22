@@ -45,7 +45,6 @@ public class GPGButton : MonoBehaviour
 
     public bool ExitOpen;
 
-    private Vector2 RectTargetPosition;
     private Vector2 RectTargetScale;
     private Vector2 RectStartScale;
     private BoxCollider2D RectBox;
@@ -69,7 +68,6 @@ public class GPGButton : MonoBehaviour
         exit = exitButton.GetComponent<ExitButton>();
 
         RectBox = GetComponent<BoxCollider2D>();
-        //RectTargetPosition = new Vector2(0, .1f);
         RectTargetScale = new Vector2(10, 4.4f);
         RectStartScale = RectBox.size;
     }
@@ -109,7 +107,6 @@ public class GPGButton : MonoBehaviour
                     ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * 15);           
                     transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 15);
 
-                    //RectBox.offset = RectTargetPosition;
                     RectBox.size = RectTargetScale;
                     if((customize.OpenSubmenu && CustomizeOpen) || (exit.OpenSubmenu && ExitOpen))
                     {
@@ -149,7 +146,6 @@ public class GPGButton : MonoBehaviour
                         customize.GPGOpen = false;
                         exit.GPGOpen = false;
                     }
-                    //RectBox.offset = Vector2.zero;
                     RectBox.size = RectStartScale;
                 }
             }
@@ -171,8 +167,6 @@ public class GPGButton : MonoBehaviour
                 drawLine.Pressed = false;
                 Pressed = false;
                 OpenSubmenu = !OpenSubmenu;
-                //Application.Quit();
-                //System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
         }
     }
@@ -183,7 +177,6 @@ public class GPGButton : MonoBehaviour
         {
             Pressed = false;
             drawLine.Pressed = false;
-            //SpriteRend.color = ButtonUpColor;
         }
     }
 }

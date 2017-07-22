@@ -81,8 +81,21 @@ public class DrawLine : MonoBehaviour
             }
             else
             {
-                Line.startColor = Color.Lerp(Line.startColor, Grey, Time.deltaTime * OpenSpeed);
-                Line.endColor = Color.Lerp(Line.endColor, Grey, Time.deltaTime * OpenSpeed);
+                if (!ScaleUp)
+                {
+                    LeftClosed = Vector3.Lerp(LeftCap.transform.localPosition, LeftTween, Time.deltaTime * Speed * 2);
+                    RightClosed = Vector3.Lerp(RightCap.transform.localPosition, RightTween, Time.deltaTime * Speed * 2);
+                    LeftCap.localPosition = LeftClosed;
+                    RightCap.localPosition = RightClosed;
+
+                    WidthClosed = Mathf.Lerp(Line.widthMultiplier, 2.3375f, Time.deltaTime * Speed * 2);
+                    Line.widthMultiplier = WidthClosed;
+                }
+                else
+                {
+                    Line.startColor = Color.Lerp(Line.startColor, Grey, Time.deltaTime * OpenSpeed);
+                    Line.endColor = Color.Lerp(Line.endColor, Grey, Time.deltaTime * OpenSpeed);
+                }
             }
         }
 

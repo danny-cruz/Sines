@@ -41,6 +41,10 @@ public class ExitButton : MonoBehaviour
     private CustomizeButton customize;
     private GPGButton gpg;
 
+    private Vector2 RectTargetScale;
+    private Vector2 RectStartScale;
+    private BoxCollider2D RectBox;
+
     // Use this for initialization
     void Start()
     {
@@ -57,6 +61,10 @@ public class ExitButton : MonoBehaviour
         GPGOpenTextPosition = new Vector3(transform.localPosition.x, -151, transform.localPosition.z);
 
         gpg = gpgButton.GetComponent<GPGButton>();
+
+        RectBox = GetComponent<BoxCollider2D>();
+        RectTargetScale = new Vector2(10, 2.6f);
+        RectStartScale = RectBox.size;
 
     }
 
@@ -86,6 +94,8 @@ public class ExitButton : MonoBehaviour
                     customize.GPGOpen = false;
                     gpg.CustomizeOpen = false;
                     drawLine.ScaleUp = true;
+
+                    RectBox.size = RectTargetScale;
 
                     ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * 15);
                     transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 15);
@@ -119,6 +129,7 @@ public class ExitButton : MonoBehaviour
                         customize.ExitOpen = false;
                         gpg.ExitOpen = false;
                     }
+                    RectBox.size = RectStartScale;
                 }
             }
         }
@@ -129,6 +140,7 @@ public class ExitButton : MonoBehaviour
 
         if (Input.GetButtonDown("Touch"))
         {
+            drawLine.Pressed = true;
             Pressed = true;
         }
 
@@ -136,6 +148,7 @@ public class ExitButton : MonoBehaviour
         {
             if (Pressed)
             {
+                drawLine.Pressed = false;
                 Pressed = false;
                 OpenSubmenu = !OpenSubmenu;
             }
@@ -146,8 +159,8 @@ public class ExitButton : MonoBehaviour
     {
         if (Pressed)
         {
+            drawLine.Pressed = false;
             Pressed = false;
-            //SpriteRend.color = ButtonUpColor;
         }
     }
 

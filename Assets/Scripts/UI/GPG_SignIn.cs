@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-//using System.Collections;
 using UnityEngine.UI;
 using GooglePlayGames;
-//using UnityEngine.SocialPlatforms;
 public class GPG_SignIn : MonoBehaviour {
 
 
@@ -11,16 +9,16 @@ public class GPG_SignIn : MonoBehaviour {
     public Color ButtonDownColor;
     public OptionsButton optionsButton;
 
-    public bool SignIn { get { return signIn; }}
-    private bool signIn;
+    public bool SignIn;
 	public int StaySignedIn;
     public Text text;
     public SpriteRenderer IconSpriteRend;
+    public GPGButton gpgButton;
 
     private Color AlphaLerp;
     private Color WhiteLerp;
 
-    private int OpenSpeed = 10;
+    private int OpenSpeed = 5;
     private int CloseSpeed = 30;
     private SpriteRenderer SpriteRend;
 	private bool Pressed;
@@ -28,37 +26,22 @@ public class GPG_SignIn : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		SpriteRend = GetComponent<SpriteRenderer>();
-
-
-
-        if (PlayerPrefs.GetInt("LoggedIn") == 1)
-        {
-            signIn = true;
-            Social.localUser.Authenticate((bool success) =>
-            {
-
-
-            });
-        }
-        else
-            text.text = "Sign In";
-
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-
-        if(!optionsButton.Open)
+        if (!gpgButton.OpenSubmenu)
         {
             AlphaLerp = Color.Lerp(SpriteRend.color, Alpha, Time.deltaTime * CloseSpeed);
 
-            SpriteRend.color = AlphaLerp;
+            SpriteRend.color = Alpha;
             text.color = Alpha;
             IconSpriteRend.color = Alpha;
+            this.gameObject.SetActive(false);
         }
 
-        else if (!optionsButton.xDelay)
+        else if (!optionsButton.xDelay && gpgButton.OpenSubmenu)
         {
             if (!Pressed)
             {
@@ -69,24 +52,17 @@ public class GPG_SignIn : MonoBehaviour {
                 IconSpriteRend.color = Color.white;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-			signIn = true;
-		
-		}
-
-		if(Input.GetKeyDown(KeyCode.X))
-        {
-			signIn = false;
-			
-		}
 	}
 
 	void OnMouseOver()
     {
 
-		if(Input.GetButtonDown("Touch"))
+        if (!gpgButton.OpenSubmenu)
+        {
+            return;
+        }
+
+        if (Input.GetButtonDown("Touch"))
         {
 
 			Pressed = true;
@@ -105,7 +81,7 @@ public class GPG_SignIn : MonoBehaviour {
                     {
 				        if(success)
                         {
-						    signIn = true;
+						    SignIn = true;
 						    PlayerPrefs.SetInt("LoggedIn", 1);
                             text.text = "Sign Out";
                         }
@@ -118,7 +94,7 @@ public class GPG_SignIn : MonoBehaviour {
 			    if(SignIn)
                 {
 				    PlayGamesPlatform.Instance.SignOut();
-				    signIn = false;
+				    SignIn = false;
 				    PlayerPrefs.SetInt("LoggedIn", 0);
                     text.text = "Sign In";
                 }
