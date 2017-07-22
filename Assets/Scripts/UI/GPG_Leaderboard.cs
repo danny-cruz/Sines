@@ -16,11 +16,12 @@ public class GPG_Leaderboard : MonoBehaviour
     public GPG_SignIn GPG_signIn;
     public Text text;
     public SpriteRenderer IconSpriteRend;
+    public GPGButton gpgButton;
 
     private Color AlphaLerp;
     private Color WhiteLerp;
 
-    private int OpenSpeed = 10;
+    private int OpenSpeed = 5;
     private int CloseSpeed = 30;
 
     private bool Pressed;
@@ -40,22 +41,23 @@ public class GPG_Leaderboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!optionsButton.Open)
+        if (!gpgButton.OpenSubmenu)
         {
             if (GPG_signIn.SignIn)
             {
-                AlphaLerp = Color.Lerp(SpriteRend.color, Alpha, Time.deltaTime * CloseSpeed);
+                AlphaLerp = Alpha;
             }
             else if (!GPG_signIn.SignIn)
             {
-                AlphaLerp = Color.Lerp(SpriteRend.color, AlphaGrey, Time.deltaTime * CloseSpeed);
+                AlphaLerp = AlphaGrey;
             }
             SpriteRend.color = AlphaLerp;
             text.color = Alpha;
             IconSpriteRend.color = Alpha;
+            this.gameObject.SetActive(false);
         }
 
-        else if (!optionsButton.xDelay)
+        else if (!optionsButton.xDelay && gpgButton.OpenSubmenu)
         {
             if (!Pressed)
             {
@@ -79,11 +81,12 @@ public class GPG_Leaderboard : MonoBehaviour
     void OnMouseOver() 
     {
 
-        if (!GPG_signIn.SignIn)
+        if (!GPG_signIn.SignIn || !gpgButton.OpenSubmenu)
         {
             return;
         }
-            if (Input.GetButtonDown("Touch")) {
+        if (Input.GetButtonDown("Touch"))
+        {
             Pressed = true;
             SpriteRend.color = ButtonDownColor;
         }

@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag.Equals("Edge")){
-			//Lost = true;
+			Lost = true;
 		}
 
 		if(other.tag.Equals("Boost")){

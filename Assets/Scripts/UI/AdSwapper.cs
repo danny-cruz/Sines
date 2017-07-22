@@ -1,15 +1,34 @@
 ﻿using UnityEngine;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 using System.Collections;
 
 public class AdSwapper : MonoBehaviour {
 	public static bool Show;
 	public static bool HideBanner;
-
+    public GPG_SignIn SignInButton;
 	// Use this for initialization
 	void Awake () {
+        PlayGamesPlatform.Activate();
+        if (PlayerPrefs.GetInt("InitialLogIn") == 0 || PlayerPrefs.GetInt("LoggedIn") == 1)
+        {
+            Social.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    PlayerPrefs.SetInt("LoggedIn", 1);
+                    SignInButton.SignIn = true;
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("LoggedIn", 0);
+                    SignInButton.SignIn = false;
+                }
+                PlayerPrefs.SetInt("InitialLogIn", 1);
+            });
+        }
 
-	
-		if (PlayerPrefs.GetInt("highscore") < 200){
+        if (PlayerPrefs.GetInt("highscore") < 200){
 			Show = false;
 		
 		}

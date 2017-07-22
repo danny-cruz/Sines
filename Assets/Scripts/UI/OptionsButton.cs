@@ -40,7 +40,7 @@ public class OptionsButton : MonoBehaviour {
 	void Start ()
     {
 
-        PlayGamesPlatform.Activate();
+        
         //MenuRenderer = Menu.GetComponent<SpriteRenderer>();
         //MenuStartColor = MenuRenderer.color;
         StartScale = new Vector3(CircleButton.transform.localScale.x,CircleButton.transform.localScale.y,CircleButton.transform.localScale.z);
@@ -119,7 +119,11 @@ public class OptionsButton : MonoBehaviour {
 
 
         if (open){
-            Menu.SetActive(true);
+            if (!Menu.activeSelf)
+            {
+                Menu.SetActive(true);
+            }
+
             StopCoroutine("Unpause");
 			Pause = true;
 			ShadowDelay = true;
@@ -149,10 +153,13 @@ public class OptionsButton : MonoBehaviour {
             ScoreShadow.effectColor = Color.Lerp(ScoreShadow.effectColor, ShadowColor, Time.deltaTime * 4);
             if (XDelay)
             {
-                
+
                 //XButton.transform.localScale = Vector3.Lerp(XButton.transform.localScale, Vector3.zero, Time.deltaTime * 4f * Speed);
                 //XButtonSprite.color = Color.Lerp(XButtonSprite.color, Alpha, Time.deltaTime * 3 * Speed);
-                Menu.SetActive(false);
+                if (Menu.activeSelf)
+                {
+                    Menu.SetActive(false);
+                }
             }
 
 			if(!ShadowDelay){

@@ -15,8 +15,9 @@ public class GPG_Rate : MonoBehaviour
     private Color AlphaLerp;
     private Color WhiteLerp;
     private SpriteRenderer SpriteRend;
+    public GPGButton gpgButton;
 
-    private int OpenSpeed = 10;
+    private int OpenSpeed = 5;
     private int CloseSpeed = 30;
 	private bool Pressed;
 
@@ -29,16 +30,17 @@ public class GPG_Rate : MonoBehaviour
     private void Update()
     {
 
-        if (!optionsButton.Open)
+        if (!gpgButton.OpenSubmenu)
         {
             AlphaLerp = Color.Lerp(SpriteRend.color, Alpha, Time.deltaTime * CloseSpeed);
 
-            SpriteRend.color = AlphaLerp;
+            SpriteRend.color = Alpha;
             text.color = Alpha;
             IconSpriteRend.color = Alpha;
+            this.gameObject.SetActive(false);
         }
 
-        else if (!optionsButton.xDelay)
+        else if (!optionsButton.xDelay && gpgButton.OpenSubmenu)
         {
             if (!Pressed)
             {
@@ -52,8 +54,12 @@ public class GPG_Rate : MonoBehaviour
     }
     void OnMouseOver()
     {
-	
-		if(Input.GetButtonDown("Touch"))
+        if (!gpgButton.OpenSubmenu)
+        {
+            return;
+        }
+
+        if (Input.GetButtonDown("Touch"))
         {	
 			Pressed = true;
             SpriteRend.color = ButtonDownColor;
@@ -63,7 +69,7 @@ public class GPG_Rate : MonoBehaviour
         {
 			if (Pressed)
             {
-				Application.OpenURL ("market://details?id=io.danielcruz.sines");			
+                Application.OpenURL ("market://details?id=io.danielcruz.sines");			
 				Pressed = false;
                 SpriteRend.color = ButtonUpColor;
             }

@@ -9,6 +9,7 @@ public class ColorChangeButton : MonoBehaviour
 
     public ColorChange Point1;
     public ColorChange Point2;
+    public bool Mirrored;
 
     public Color Alpha;
     public Color ButtonUpColor;
@@ -22,12 +23,21 @@ public class ColorChangeButton : MonoBehaviour
     private bool Pressed;
 
     private SpriteRenderer SpriteRend;
-    //public Text text;
+    public Text ButtonText;
 
     public OptionsButton optionsButton;
+    private string RainbowText = "Rainbow";
+    private string FireText = "Fire";
+    private string AirText = "Air";
+    private string EarthText = "Earth";
+    private string WaterText = "Water";
+    private string AetherText = "Aether";
+    private string OrderText = "Order";
+    private string ChaosText = "Chaos";
 
     // Use this for initialization
     void Start () {
+
         SpriteRend = GetComponent<SpriteRenderer>();	
 	}
 	
@@ -39,7 +49,7 @@ public class ColorChangeButton : MonoBehaviour
             AlphaLerp = Color.Lerp(SpriteRend.color, Alpha, Time.deltaTime * CloseSpeed);
 
             SpriteRend.color = AlphaLerp;
-            //text.color = Alpha;
+            ButtonText.color = Alpha;
         }
 
         else if (!optionsButton.xDelay)
@@ -49,7 +59,7 @@ public class ColorChangeButton : MonoBehaviour
                 WhiteLerp = Color.Lerp(SpriteRend.color, ButtonUpColor, Time.deltaTime * OpenSpeed);
 
                 SpriteRend.color = WhiteLerp;
-                ///text.color = Color.white;
+                ButtonText.color = Color.white;
             }
         }
     }
@@ -74,58 +84,98 @@ public class ColorChangeButton : MonoBehaviour
                 if (Point1.IsRainbow)
                 {
                     Point1.IsRainbow = false;
-                    Point1.IsWater = true;
-
-                    Point2.IsRainbow = false;
-                    Point2.IsWater = true;
-                }
-                else if (Point1.IsWater)
-                {
-                    Point1.IsWater = false;
-                    Point1.IsEarth = true;
-
-                    Point2.IsWater = false;
-                    Point2.IsEarth = true;
-                }
-                else if (Point1.IsEarth)
-                {
-                    Point1.IsEarth = false;
                     Point1.IsFire = true;
+                    ButtonText.text = FireText;
 
-                    Point2.IsEarth = false;
-                    Point2.IsFire = true;
+                    if (Mirrored)
+                    {
+                        Point2.IsRainbow = false;
+                        Point2.IsFire = true;
+                    }
                 }
                 else if (Point1.IsFire)
                 {
                     Point1.IsFire = false;
-                    Point1.IsAether = true;
+                    Point1.IsAir = true;
+                    ButtonText.text = AirText;
 
-                    Point2.IsFire = false;
-                    Point2.IsAether = true;
+                    if (Mirrored)
+                    {
+                        Point2.IsFire = false;
+                        Point2.IsAir = true;
+                    }
+                }
+                else if (Point1.IsAir)
+                {
+                    Point1.IsAir = false;
+                    Point1.IsEarth = true;
+                    ButtonText.text = EarthText;
+
+                    if (Mirrored)
+                    {
+                        Point2.IsAir = false;
+                        Point2.IsEarth = true;
+                    }
+                }
+                else if (Point1.IsEarth)
+                {
+                    Point1.IsEarth = false;
+                    Point1.IsWater = true;
+                    ButtonText.text = WaterText;
+
+                    if (Mirrored)
+                    {
+                        Point2.IsEarth = false;
+                        Point2.IsWater = true;
+                    }
+                }
+                else if (Point1.IsWater)
+                {
+                    Point1.IsWater = false;
+                    Point1.IsAether = true;
+                    ButtonText.text = AetherText;
+
+                    if (Mirrored)
+                    {
+                        Point2.IsWater = false;
+                        Point2.IsAether = true;
+                    }
                 }
                 else if (Point1.IsAether)
                 {
                     Point1.IsAether = false;
                     Point1.IsLight = true;
+                    ButtonText.text = OrderText;
 
-                    Point2.IsAether = false;
-                    Point2.IsLight = true;
+                    if (Mirrored)
+                    {
+                        Point2.IsAether = false;
+                        Point2.IsLight = true;
+                    }
                 }
                 else if (Point1.IsLight)
                 {
                     Point1.IsLight = false;
                     Point1.IsDark = true;
+                    ButtonText.text = ChaosText;
 
-                    Point2.IsLight = false;
-                    Point2.IsDark = true;
+                    if (Mirrored)
+                    {
+                        Point2.IsLight = false;
+                        Point2.IsDark = true;
+                    }
                 }
                 else if (Point1.IsDark)
                 {
                     Point1.IsDark = false;
                     Point1.IsRainbow = true;
+                    ButtonText.text = RainbowText;
 
-                    Point2.IsDark = false;
-                    Point2.IsRainbow = true;
+                    if (Mirrored)
+                    {
+                        Point2.IsDark = false;
+                        Point2.IsRainbow = true;
+                    }
                 }
             }
         }
