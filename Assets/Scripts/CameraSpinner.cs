@@ -11,35 +11,47 @@ public class CameraSpinner : MonoBehaviour {
 	private float RotSpeed;
 	public float SecondModifier;
 	private bool Pause;
-	// Use this for initialization
-	void Start () {
+    private float RandomStart;
+    // Use this for initialization
+    void Start () {
 		RotSpeed = 0;
 		MainCam = Camera.main;
-	}
+        
+        RandomStart = Random.Range(0, 2);
+        if (RandomStart >= 1F)
+        {
+            RightStart = true;
+        }
+        else
+            RightStart = false;
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		Pause = OptionsButton.Pause;
 		if(!Controller.Lost)
         {
+	        if(!Pause)
+            {
+		        if(SpinRight)
+                {
+	                RotSpeed = Mathf.Lerp(RotSpeed, Speed, Time.deltaTime);
+                    MainCam.transform.Rotate(Vector3.forward * RotSpeed);
+                }
 
-	    if(!Pause)
-        {
-		MainCam.transform.Rotate(Vector3.forward * RotSpeed);
+		        if(SpinLeft)
+                {
+	                RotSpeed = Mathf.Lerp(RotSpeed, -Speed, Time.deltaTime);
+                    MainCam.transform.Rotate(Vector3.forward * RotSpeed);
+                }
 
-		if(SpinRight){
-			RotSpeed = Mathf.Lerp(RotSpeed, Speed, Time.deltaTime);
-		}
-
-		if(SpinLeft){
-			RotSpeed = Mathf.Lerp(RotSpeed, -Speed, Time.deltaTime);
-		}
-
-		if(!SpinLeft && !SpinRight){
-			RotSpeed =0;
-			MainCam.transform.rotation = Quaternion.Lerp(MainCam.transform.rotation, Quaternion.Euler(0,0,0), Time.deltaTime * Speed * 2);
-		}
-		}
+		        if(!SpinLeft && !SpinRight)
+                {
+			        RotSpeed =0;
+			        MainCam.transform.rotation = Quaternion.Lerp(MainCam.transform.rotation, Quaternion.Euler(0,0,0), Time.deltaTime * Speed * 2);
+		        }
+		    }
 		}
 	}
 
@@ -50,42 +62,10 @@ public class CameraSpinner : MonoBehaviour {
 		SpinLeft = true;
 		yield return new WaitForSeconds(Length);
 		SpinLeft = false;
-        if (SecondModifier == 0)
-        {
-            SecondModifier += 1;
-            yield break;
-        }
-        else if (SecondModifier <= 2)
-        {
-            SpinLeft = true;
-            yield return new WaitForSeconds(Length);
-            SpinLeft = false;
-
-            SpinRight = true;
-            yield return new WaitForSeconds(Length);
-            SpinRight = false;
-            
-            if(SecondModifier < 2)
-            {
-                SecondModifier += 1;
-                yield break;
-            }
-            else if (SecondModifier == 2)
-            {
-                SpinRight = true;
-                yield return new WaitForSeconds(Length);
-                SpinRight = false;
-
-                SpinLeft = true;
-                yield return new WaitForSeconds(Length);
-                SpinLeft = false;
-                SecondModifier -= Random.Range(1, 2);
-            }
-            
-        }
     }
 
-	IEnumerator RotateCam2 (){
+	IEnumerator RotateCam2 ()
+    {
 		SpinLeft = true;
 		yield return new WaitForSeconds(Length);
 		SpinLeft = false;
@@ -93,54 +73,22 @@ public class CameraSpinner : MonoBehaviour {
 		SpinRight = true;
 		yield return new WaitForSeconds(Length);
 		SpinRight = false;
-
-        if(SecondModifier == 0)
-        {
-            SecondModifier += 1;
-            yield break;
-        }
-        else if (SecondModifier <= 2)
-        {
-            SpinRight = true;
-            yield return new WaitForSeconds(Length);
-            SpinRight = false;
-
-            SpinLeft = true;
-            yield return new WaitForSeconds(Length);
-            SpinLeft = false;
-
-            if (SecondModifier < 2)
-            {
-                SecondModifier += 1;
-                yield break;
-            }
-            else if (SecondModifier == 2)
-            {
-                SpinLeft = true;
-                yield return new WaitForSeconds(Length);
-                SpinLeft = false;
-
-                SpinRight = true;
-                yield return new WaitForSeconds(Length);
-                SpinRight = false;
-                SecondModifier -= Random.Range(1, 2);
-            }
-        }
     }
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.tag.Equals("Player")){
 
 			transform.position = new Vector3(transform.position.x, transform.position.y + 1200, transform.position.z);
-			if(RightStart){
+			if(RightStart)
+            {
 			StartCoroutine("RotateCam");
 			}
 
-			if(!RightStart){
+			if(!RightStart)
+            {
 				StartCoroutine("RotateCam2");
 			}
 			RightStart = !RightStart;
-			
 		}
 	}
 }

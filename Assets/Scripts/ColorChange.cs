@@ -26,29 +26,98 @@ public class ColorChange : MonoBehaviour
 	internal bool Lost;
 	private Controller controller;
 	public GameObject ControllerObject;
-	private bool Begin;
 
+    public bool Begin;
+    public bool Left;
 	// Use this for initialization
 	void Start ()
     {
-        if(IsRainbow)
+        if (Left)
         {
-            TargetColor = Rainbow[ColorIndex];
+            if (PlayerPrefs.GetInt("LeftColor") == 0)
+            {
+                IsRainbow = true;
+                TargetColor = Rainbow[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 1)
+            {
+                IsFire = true;
+                TargetColor = Fire[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 2)
+            {
+                IsAir = true;
+                TargetColor = Air[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 3)
+            {
+                IsEarth = true;
+                TargetColor = Earth[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 4)
+            {
+                IsWater = true;
+                TargetColor = Water[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 5)
+            {
+                IsAether = true;
+                TargetColor = Aether[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 6)
+            {
+                IsDark = true;
+                TargetColor = Dark[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 7)
+            {
+                IsLight = true;
+                TargetColor = Light[ColorIndex];
+            }
         }
-        else if (IsWater)
+        else if (!Left)
         {
-            TargetColor = Water[ColorIndex];
+            if (PlayerPrefs.GetInt("RightColor") == 0)
+            {
+                IsRainbow = true;
+                TargetColor = Rainbow[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 1)
+            {
+                IsFire = true;
+                TargetColor = Fire[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 2)
+            {
+                IsAir = true;
+                TargetColor = Air[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 3)
+            {
+                IsEarth = true;
+                TargetColor = Earth[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 4)
+            {
+                IsWater = true;
+                TargetColor = Water[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 5)
+            {
+                IsAether = true;
+                TargetColor = Aether[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 6)
+            {
+                IsDark = true;
+                TargetColor = Dark[ColorIndex];
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 7)
+            {
+                IsLight = true;
+                TargetColor = Light[ColorIndex];
+            }
         }
-        else if (IsFire)
-        {
-            TargetColor = Fire[ColorIndex];
-        }
-        else if (IsLight)
-        {
-            TargetColor = Light[ColorIndex];
-        }
-
-
         controller = ControllerObject.GetComponent<Controller>();
 		TrailRend = GetComponent<TrailRenderer>();
 		LerpColor = StartColor;

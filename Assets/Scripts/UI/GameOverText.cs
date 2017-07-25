@@ -50,6 +50,7 @@ public class GameOverText : MonoBehaviour {
 			
 		if(Lost && !FadeStart)
         {
+            text.enabled = true;
 			StartCoroutine("TextFadeIn");
 		}
 	

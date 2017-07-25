@@ -31,7 +31,8 @@ public class Controller : MonoBehaviour {
 	public float TangentSine;
 	private Player PlayerPoint;
 	private GameObject PlayPoint;
-	internal bool Begin;
+	public bool Begin { get { return begin; } }
+    private bool begin;
 
 	public bool RotateForward;
 
@@ -93,9 +94,9 @@ public class Controller : MonoBehaviour {
 		
 
 		if(Point1.transform.position.y >=0){
-			if(!Begin){
+			if(!begin){
 					StartCoroutine("FirstRot");
-			Begin = true;
+			begin = true;
 				
 					Score.enabled = true;
 				Blocker1.SetActive(false);
@@ -107,7 +108,7 @@ public class Controller : MonoBehaviour {
 	
 		
 
-		if(!Begin && !Lost){
+		if(!begin && !Lost){
 			if(!Pause){
 			if(RotateForward){
 					MiddlePoint1.transform.Rotate(Vector3.forward * 3);
@@ -130,10 +131,10 @@ public class Controller : MonoBehaviour {
 
 		}
 
-		if(Begin && Lost){
+		if(begin && Lost){
 
 				if(Input.GetButtonDown("Touch")){
-					Begin = false;
+					begin = false;
 					Fader.FadeAlpha = false;
 					Fader.FadeBlack = true;
 				}
@@ -144,7 +145,7 @@ public class Controller : MonoBehaviour {
 			MoveSpeed = 0;
 		}
 
-		if(Begin && !Lost){
+		if(begin && !Lost){
 			MoveSpeed = 25 + SpeedMod;
 		transform.position += Vector3.up * Time.deltaTime * MoveSpeed ;
 

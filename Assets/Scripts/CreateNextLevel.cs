@@ -33,8 +33,8 @@ public class CreateNextLevel : MonoBehaviour {
 
 
 
-		if(Player.transform.position.y > EndPoint.transform.position.y + 30){
-
+		if(Player.transform.position.y > EndPoint.transform.position.y + 50){
+            transform.parent.gameObject.SetActive(false);
 		}
 	}
 

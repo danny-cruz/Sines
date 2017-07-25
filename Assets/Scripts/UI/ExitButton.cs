@@ -22,10 +22,7 @@ public class ExitButton : MonoBehaviour
     public bool GPGOpen;
 
 
-    private Vector3 StartScale;
-    private Color AlphaLerp;
-    private Color WhiteLerp;
-    private int OpenSpeed = 10;
+    private int OpenSpeed = 15;
     private int CloseSpeed = 30;
     private bool Pressed;
 
@@ -94,11 +91,10 @@ public class ExitButton : MonoBehaviour
                     customize.GPGOpen = false;
                     gpg.CustomizeOpen = false;
                     drawLine.ScaleUp = true;
-
                     RectBox.size = RectTargetScale;
 
-                    ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * 15);
-                    transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 15);
+                    ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * OpenSpeed);
+                    transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * OpenSpeed);
 
                     if ((customize.OpenSubmenu && CustomizeOpen) || (gpg.OpenSubmenu && GPGOpen))
                     {
@@ -114,18 +110,18 @@ public class ExitButton : MonoBehaviour
                     drawLine.ScaleUp = false;
                     if (CustomizeOpen)
                     {
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, CustomizeOpenTextPosition, Time.deltaTime * 15);
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, CustomizeOpenPosition, Time.deltaTime * 15);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, CustomizeOpenTextPosition, Time.deltaTime * OpenSpeed);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, CustomizeOpenPosition, Time.deltaTime * OpenSpeed);
                     }
                     else if (GPGOpen)
                     {
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, GPGOpenTextPosition, Time.deltaTime * 15);
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, GPGOpenPosition, Time.deltaTime * 15);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, GPGOpenTextPosition, Time.deltaTime * OpenSpeed);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, GPGOpenPosition, Time.deltaTime * OpenSpeed);
                     }
                     else
                     {
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 30);
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextClosed, Time.deltaTime * 30);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * CloseSpeed);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextClosed, Time.deltaTime * CloseSpeed);
                         customize.ExitOpen = false;
                         gpg.ExitOpen = false;
                     }

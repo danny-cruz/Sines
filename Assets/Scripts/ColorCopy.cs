@@ -8,6 +8,7 @@ public class ColorCopy : MonoBehaviour {
 	public Color LerpColor;
     public Color Alpha;
     public bool Radial;
+    public bool StartSprite;
 
 	// Use this for initialization
 	void Start () {
@@ -19,14 +20,26 @@ public class ColorCopy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if ((ColorC.IsDark || ColorC.IsLight) && Radial)
+        if (!OptionsButton.Pause)
         {
-            if(!OptionsButton.Pause)
-            LerpColor = Color.Lerp(LerpColor, Alpha, Time.deltaTime * 7);
-        }
-        else
-        {
-            LerpColor = ColorC.LerpColor;
+            if ((ColorC.IsDark || ColorC.IsLight) && Radial)
+            {
+                if (!StartSprite)
+                {
+                    LerpColor = Color.Lerp(LerpColor, Alpha, Time.deltaTime * 10);
+                }
+            }
+            else
+            {
+                if (!StartSprite)
+                {
+                    LerpColor = ColorC.LerpColor;
+                }
+                else if (ColorC.Begin)
+                {
+                    LerpColor = ColorC.LerpColor;
+                }
+            }
         }
 
         SpriteRend.color = LerpColor;

@@ -22,7 +22,8 @@ public class Baby : MonoBehaviour
 	private bool Pause;
 	private bool Lost;
     private bool Resetting;
-    
+    public GameObject Player;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -38,20 +39,13 @@ public class Baby : MonoBehaviour
         Lost = Controller.Lost;
         Pause = OptionsButton.Pause;
 
-        if (Lost || Pause)
-        {
-            Resetting = false;
-            StopCoroutine("ResetPositions");
-            return;
-        }
-
-		if(!Pause)
+		if(!Pause && !Lost)
         {
 		    if(Activate)
             {   
-                if(!Resetting)
+                if(Player.transform.position.y > transform.position.y + 75)
                 {
-                    StartCoroutine("ResetPositions");
+                    ResetPositions();
                 }
 
 			    Point1.transform.position = Vector3.Lerp(Point1.transform.position, Point1Target.transform.position, Time.deltaTime * Speed);
@@ -70,14 +64,11 @@ public class Baby : MonoBehaviour
 		if(other.tag.Equals("Player"))
         {
 			Activate = true;
-            StartCoroutine("ResetPositions");
 		}
 	}
 
-    IEnumerator ResetPositions ()
+    void ResetPositions ()
     {
-        yield return new WaitForSeconds(5);
-
         Resetting = true;
         Activate = false;
         Point1.transform.localPosition = Point1Start;

@@ -37,7 +37,10 @@ public class GPGButton : MonoBehaviour
     private ExitButton exit;
 
     public bool CustomizeOpen;
-    
+
+    private int OpenSpeed = 15;
+    private int CloseSpeed = 30;
+
     private Vector3 CustomizeOpenPosition;
     private Vector3 CustomizeOpenTextPosition;
     private Vector3 ExitOpenPosition;
@@ -104,8 +107,8 @@ public class GPGButton : MonoBehaviour
                     GPG_Rate.SetActive(true);
 
 
-                    ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * 15);           
-                    transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 15);
+                    ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * OpenSpeed);           
+                    transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * OpenSpeed);
 
                     RectBox.size = RectTargetScale;
                     if((customize.OpenSubmenu && CustomizeOpen) || (exit.OpenSubmenu && ExitOpen))
@@ -120,11 +123,11 @@ public class GPGButton : MonoBehaviour
                 {
                     if (CustomizeOpen)
                     {
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, CustomizeOpenTextPosition, Time.deltaTime * 15);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, CustomizeOpenTextPosition, Time.deltaTime * OpenSpeed);
                         drawLine.ScaleUp = false;
                         if (ButtonText.rectTransform.localPosition.y < -70)
                         {
-                            transform.localPosition = Vector3.Lerp(transform.localPosition, CustomizeOpenPosition, Time.deltaTime * 15);      
+                            transform.localPosition = Vector3.Lerp(transform.localPosition, CustomizeOpenPosition, Time.deltaTime * OpenSpeed);      
                         }
                     }
                     else if (ExitOpen)
@@ -134,15 +137,15 @@ public class GPGButton : MonoBehaviour
                             drawLine.ScaleUp = false;
                             
                         }
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, ExitOpenPosition, Time.deltaTime * 15);
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, ExitOpenTextPosition, Time.deltaTime * 15);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, ExitOpenPosition, Time.deltaTime * OpenSpeed);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, ExitOpenTextPosition, Time.deltaTime * OpenSpeed);
                         
                     }
                     else
                     {
                         drawLine.ScaleUp = false;
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 30);    
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextClosed, Time.deltaTime * 30);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * CloseSpeed);    
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextClosed, Time.deltaTime * CloseSpeed);
                         customize.GPGOpen = false;
                         exit.GPGOpen = false;
                     }
@@ -164,6 +167,8 @@ public class GPGButton : MonoBehaviour
         {
             if (Pressed)
             {
+                PlayerPrefs.SetInt("LeftColor", 0);
+                PlayerPrefs.SetInt("RightColor", 0);
                 drawLine.Pressed = false;
                 Pressed = false;
                 OpenSubmenu = !OpenSubmenu;

@@ -9,9 +9,19 @@ public class ColorChangeButton : MonoBehaviour
 
     public ColorChange Point1;
     public ColorChange Point2;
-    public bool Mirrored;
+    public SineColor Sine0;
+    public SineColor Sine1;
+    public SineColor Sine2;
+    public SineColor Sine3;
+    public SineColor Sine4;
+    public SineColor Sine5;
+
+    public CircleMask circleMask;
+    public CustomizeButton customizeButton;
 
     public Color Alpha;
+    public Color GreyAlpha;
+    public Color Grey;
     public Color ButtonUpColor;
     public Color ButtonDownColor;
     private Color AlphaLerp;
@@ -26,7 +36,7 @@ public class ColorChangeButton : MonoBehaviour
     public Text ButtonText;
 
     public OptionsButton optionsButton;
-    private string RainbowText = "Rainbow";
+    private string RainbowText = "Spectral";
     private string FireText = "Fire";
     private string AirText = "Air";
     private string EarthText = "Earth";
@@ -35,31 +45,147 @@ public class ColorChangeButton : MonoBehaviour
     private string OrderText = "Order";
     private string ChaosText = "Chaos";
 
+    public int ColorIndex1;
+    public int ColorIndex2;
+
+    public bool Left;
+
+    private Vector3 StartScale;
+    private Vector3 TargetScale;
+
     // Use this for initialization
     void Start () {
 
-        SpriteRend = GetComponent<SpriteRenderer>();	
-	}
+
+        if (Left)
+        {
+            if (PlayerPrefs.GetInt("LeftColor") == 0)
+            {
+                ButtonText.text = RainbowText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 1)
+            {
+                ButtonText.text = FireText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 2)
+            {
+                ButtonText.text = AirText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 3)
+            {
+                ButtonText.text = EarthText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 4)
+            {
+                ButtonText.text = WaterText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 5)
+            {
+                ButtonText.text = AetherText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 6)
+            {
+                ButtonText.text = ChaosText;
+            }
+            else if (PlayerPrefs.GetInt("LeftColor") == 7)
+            {
+                ButtonText.text = OrderText;
+            }
+        }
+        else if (!Left)
+        {
+            if (PlayerPrefs.GetInt("RightColor") == 0)
+            {
+                ButtonText.text = RainbowText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 1)
+            {
+                ButtonText.text = FireText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 2)
+            {
+                ButtonText.text = AirText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 3)
+            {
+                ButtonText.text = EarthText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 4)
+            {
+                ButtonText.text = WaterText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 5)
+            {
+                ButtonText.text = AetherText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 6)
+            {
+                ButtonText.text = ChaosText;
+            }
+            else if (PlayerPrefs.GetInt("RightColor") == 7)
+            {
+                ButtonText.text = OrderText;
+            }
+        }
+        SpriteRend = GetComponent<SpriteRenderer>();
+
+        StartScale = transform.localScale;
+        TargetScale = new Vector3(transform.localScale.x * .9f, transform.localScale.y * .9f, transform.localScale.z);
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (!optionsButton.Open)
+        if (!circleMask.Open)
         {
-            AlphaLerp = Color.Lerp(SpriteRend.color, Alpha, Time.deltaTime * CloseSpeed);
+            SpriteRend.color = Alpha;
+            ButtonText.color = GreyAlpha;
+            ButtonText.enabled = false;
+            Sine0.StopCoroutine("StartSequence");
+            Sine1.StopCoroutine("StartSequence");
+            Sine2.StopCoroutine("StartSequence");
 
-            SpriteRend.color = AlphaLerp;
-            ButtonText.color = Alpha;
+            Sine3.StopCoroutine("StartSequence");
+            Sine4.StopCoroutine("StartSequence");
+            Sine5.StopCoroutine("StartSequence");
+
+
+            Sine0.ColorIndex = ColorIndex1;
+            Sine1.ColorIndex = ColorIndex1;
+            Sine2.ColorIndex = ColorIndex1;
+
+
+            Sine3.ColorIndex = ColorIndex2;
+            Sine4.ColorIndex = ColorIndex2;
+            Sine5.ColorIndex = ColorIndex2;
+
+            Sine0.Started = false;
+            Sine1.Started = false;
+            Sine2.Started = false;
+
+            Sine3.Started = false;
+            Sine4.Started = false;
+            Sine5.Started = false;
+
+            this.gameObject.SetActive(false);
         }
-
-        else if (!optionsButton.xDelay)
+        else if(customizeButton.OpenSubmenu)
         {
+            if (circleMask.Open)
+            {
+                ButtonText.enabled = true;
+                ButtonText.color = Color.Lerp(ButtonText.color, Grey, Time.deltaTime * 2);
+            }
+
             if (!Pressed)
             {
-                WhiteLerp = Color.Lerp(SpriteRend.color, ButtonUpColor, Time.deltaTime * OpenSpeed);
+                SpriteRend.color = Sine0.LerpColor;
+                transform.localScale = Vector3.Lerp(transform.localScale, StartScale, Time.deltaTime * 15);
+            }
 
-                SpriteRend.color = WhiteLerp;
-                ButtonText.color = Color.white;
+            if (Pressed)
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, TargetScale, Time.deltaTime * 15);
             }
         }
     }
@@ -69,7 +195,6 @@ public class ColorChangeButton : MonoBehaviour
         if (Input.GetButtonDown("Touch"))
         {
             Pressed = true;
-            SpriteRend.color = ButtonDownColor;
         }
 
         if (Input.GetButtonUp("Touch"))
@@ -77,106 +202,93 @@ public class ColorChangeButton : MonoBehaviour
             if (Pressed)
             {
                 Pressed = false;
-                SpriteRend.color = ButtonUpColor;
-                Point1.ColorIndex = 0;
-                Point2.ColorIndex = 1;
+                Sine0.StopCoroutine("StartSequence");
+                Sine1.StopCoroutine("StartSequence");      
+                Sine2.StopCoroutine("StartSequence");
 
+                Sine3.StopCoroutine("StartSequence");
+                Sine4.StopCoroutine("StartSequence");
+                Sine5.StopCoroutine("StartSequence");
+
+               
+
+                Sine0.ColorIndex = ColorIndex1;
+                Sine1.ColorIndex = ColorIndex1;
+                Sine2.ColorIndex = ColorIndex1;
+
+                Sine3.ColorIndex = ColorIndex2;
+                Sine4.ColorIndex = ColorIndex2;
+                Sine5.ColorIndex = ColorIndex2;
+                Sine0.LerpColor = Color.white;
+                Sine1.LerpColor = Color.white;
+                Sine2.LerpColor = Color.white;
+                Sine0.Started = false;
+                Sine1.Started = false;
+                Sine2.Started = false;
+
+                Sine3.Started = false;
+                Sine4.Started = false;
+                Sine5.Started = false;
+
+                
                 if (Point1.IsRainbow)
                 {
                     Point1.IsRainbow = false;
                     Point1.IsFire = true;
                     ButtonText.text = FireText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsRainbow = false;
-                        Point2.IsFire = true;
-                    }
+                    SaveColor(1);
                 }
                 else if (Point1.IsFire)
                 {
                     Point1.IsFire = false;
                     Point1.IsAir = true;
                     ButtonText.text = AirText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsFire = false;
-                        Point2.IsAir = true;
-                    }
+                    SaveColor(2);
                 }
                 else if (Point1.IsAir)
                 {
                     Point1.IsAir = false;
                     Point1.IsEarth = true;
                     ButtonText.text = EarthText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsAir = false;
-                        Point2.IsEarth = true;
-                    }
+                    SaveColor(3);
                 }
                 else if (Point1.IsEarth)
                 {
                     Point1.IsEarth = false;
                     Point1.IsWater = true;
                     ButtonText.text = WaterText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsEarth = false;
-                        Point2.IsWater = true;
-                    }
+                    SaveColor(4);
                 }
                 else if (Point1.IsWater)
                 {
                     Point1.IsWater = false;
                     Point1.IsAether = true;
                     ButtonText.text = AetherText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsWater = false;
-                        Point2.IsAether = true;
-                    }
+                    SaveColor(5);
                 }
                 else if (Point1.IsAether)
                 {
                     Point1.IsAether = false;
-                    Point1.IsLight = true;
-                    ButtonText.text = OrderText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsAether = false;
-                        Point2.IsLight = true;
-                    }
-                }
-                else if (Point1.IsLight)
-                {
-                    Point1.IsLight = false;
                     Point1.IsDark = true;
                     ButtonText.text = ChaosText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsLight = false;
-                        Point2.IsDark = true;
-                    }
+                    SaveColor(6);
                 }
                 else if (Point1.IsDark)
                 {
                     Point1.IsDark = false;
+                    Point1.IsLight = true;
+                    ButtonText.text = OrderText;
+                    SaveColor(7);
+                }
+                else if (Point1.IsLight)
+                {
+                    Point1.IsLight = false;
                     Point1.IsRainbow = true;
                     ButtonText.text = RainbowText;
-
-                    if (Mirrored)
-                    {
-                        Point2.IsDark = false;
-                        Point2.IsRainbow = true;
-                    }
+                    SaveColor(0);
                 }
+                Point1.ColorIndex = ColorIndex1;
+                Point2.ColorIndex = ColorIndex2;
             }
         }
     }
@@ -188,5 +300,17 @@ public class ColorChangeButton : MonoBehaviour
             Pressed = false;
             //SpriteRend.color = ButtonUpColor;
         }
+    }
+
+    void SaveColor (int Color)
+    {
+        if(Left)
+        {
+            PlayerPrefs.SetInt("LeftColor", Color);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("RightColor", Color);
+        }    
     }
 }

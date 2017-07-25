@@ -22,10 +22,15 @@ public class GPG_SignIn : MonoBehaviour {
     private int CloseSpeed = 30;
     private SpriteRenderer SpriteRend;
 	private bool Pressed;
-    
-	// Use this for initialization
-	void Awake () {
+
+    private Vector3 StartScale;
+    private Vector3 TargetScale;
+
+    // Use this for initialization
+    void Awake () {
 		SpriteRend = GetComponent<SpriteRenderer>();
+        StartScale = transform.localScale;
+        TargetScale = new Vector3(transform.localScale.x * .95f, transform.localScale.y * .95f, transform.localScale.z);
     }
 	
 	// Update is called once per frame
@@ -37,6 +42,7 @@ public class GPG_SignIn : MonoBehaviour {
 
             SpriteRend.color = Alpha;
             text.color = Alpha;
+            text.enabled = false;
             IconSpriteRend.color = Alpha;
             this.gameObject.SetActive(false);
         }
@@ -45,11 +51,17 @@ public class GPG_SignIn : MonoBehaviour {
         {
             if (!Pressed)
             {
+                transform.localScale = Vector3.Lerp(transform.localScale, StartScale, Time.deltaTime * 15);
                 WhiteLerp = Color.Lerp(SpriteRend.color, ButtonUpColor, Time.deltaTime * OpenSpeed);
 
                 SpriteRend.color = WhiteLerp;
+                text.enabled = true;
                 text.color = Color.white;
                 IconSpriteRend.color = Color.white;
+            }
+            else
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, TargetScale, Time.deltaTime * 15);
             }
         }
 	}

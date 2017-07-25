@@ -5,6 +5,7 @@ using UnityEngine;
 public class SineMover : MonoBehaviour {
     public Vector3 ResetPosition;
     public float MaxPosition;
+    public GameObject Sine;
 	// Use this for initialization
 	void Start ()
     {
@@ -16,11 +17,11 @@ public class SineMover : MonoBehaviour {
     {
 	    if(transform.localPosition.y <= MaxPosition)
         {
-            transform.localPosition = ResetPosition;
+            transform.localPosition = new Vector3 (Sine.transform.localPosition.x, Sine.transform.localPosition.y + 1.396f, -15);
         }
         else
         {
-            transform.localPosition -= Vector3.up * Time.deltaTime;
+            transform.Translate(Vector3.down * Time.deltaTime);
         }
 	}
 }

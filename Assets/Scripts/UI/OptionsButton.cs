@@ -71,7 +71,7 @@ public class OptionsButton : MonoBehaviour {
 	}
 
 	IEnumerator Unpause (){
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(.75f);
 		Pause = false;
 		open = false;
 	
@@ -86,9 +86,27 @@ public class OptionsButton : MonoBehaviour {
 
 	
 	}
-	// Update is called once per frame
-	void Update () {
+    void OnApplicationPause()
+    {
+        if (controller.Begin)
+        {
+            Pause = true;
+            open = true;
+            XDelay = false;
+            CircleButton.transform.localScale = TargetScale;
+            if (!Menu.activeSelf)
+            {
+                Menu.SetActive(true);
+            }
+        }
+    }
+    void OnApplicationFocus()
+    {
 
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -136,16 +154,6 @@ public class OptionsButton : MonoBehaviour {
             {
 				ShadowButton.transform.localScale = Vector3.zero;
 			}
-
-			if(!XDelay){
-                
-                //XButton.transform.localScale = Vector3.Lerp(XButton.transform.localScale, new Vector3(1,1,1), Time.deltaTime * 2f * Speed);
-                //XButtonSprite.color = Color.Lerp(XButtonSprite.color, XButtonStartColor, Time.deltaTime * 4 * Speed);
-                //MenuRenderer.color = Color.Lerp(MenuRenderer.color, Color.white, Time.deltaTime * 5);
-            }
-
-		
-
 
 		}
 

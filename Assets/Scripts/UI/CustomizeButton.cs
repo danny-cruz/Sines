@@ -6,7 +6,6 @@ using UnityEngine;
 public class CustomizeButton : MonoBehaviour
 {
 
-    public Color Alpha;
     public Color ButtonUpColor;
     public Color ButtonDownColor;
     public OptionsButton optionsButton;
@@ -15,13 +14,11 @@ public class CustomizeButton : MonoBehaviour
     public DrawLine drawLine;
     private Vector3 StartScale;
     private Vector3 TargetScale;
-    private Color AlphaLerp;
-    private Color WhiteLerp;
 
     private Vector3 TextOpen;
     private Vector3 TextClosed;
 
-    private int OpenSpeed = 10;
+    private int OpenSpeed = 15;
     private int CloseSpeed = 30;
     private bool Pressed;
     
@@ -48,6 +45,9 @@ public class CustomizeButton : MonoBehaviour
     private Vector2 RectTargetScale;
     private Vector2 RectStartScale;
     private BoxCollider2D RectBox;
+
+    public GameObject LeftButton;
+    public GameObject RightButton;
 
     // Use this for initialization
     void Start()
@@ -99,9 +99,11 @@ public class CustomizeButton : MonoBehaviour
                     exit.GPGOpen = false;
                     drawLine.ScaleUp = true;
                     RectBox.size = RectTargetScale;
-                    
+                    LeftButton.SetActive(true);
+                    RightButton.SetActive(true);
+
                     transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 15);
-                    ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * 15);
+                    ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextOpen, Time.deltaTime * OpenSpeed);
 
                     if ((gpg.OpenSubmenu && GPGOpen) || (exit.OpenSubmenu && ExitOpen))
                     {
@@ -119,8 +121,8 @@ public class CustomizeButton : MonoBehaviour
                         {
                             drawLine.ScaleUp = false;
                         }
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, GPGOpenPosition, Time.deltaTime * 15);
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, GPGOpenTextPosition, Time.deltaTime * 15);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, GPGOpenPosition, Time.deltaTime * OpenSpeed);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, GPGOpenTextPosition, Time.deltaTime * OpenSpeed);
                     }
                     else if (ExitOpen)
                     {
@@ -128,8 +130,8 @@ public class CustomizeButton : MonoBehaviour
                         {
                             drawLine.ScaleUp = false;
                         }
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, ExitOpenPosition, Time.deltaTime * 15);
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, ExitOpenTextPosition, Time.deltaTime * 15);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, ExitOpenPosition, Time.deltaTime * OpenSpeed);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, ExitOpenTextPosition, Time.deltaTime * OpenSpeed);
                     }
                     else
                     {
@@ -137,8 +139,8 @@ public class CustomizeButton : MonoBehaviour
                         
                         gpg.CustomizeOpen = false;
                         exit.CustomizeOpen = false;
-                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextClosed, Time.deltaTime * 30);
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * 30);
+                        ButtonText.rectTransform.localPosition = Vector3.Lerp(ButtonText.rectTransform.localPosition, TextClosed, Time.deltaTime * CloseSpeed);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPosition, Time.deltaTime * CloseSpeed);
                     }
                     RectBox.size = RectStartScale;
                 }
