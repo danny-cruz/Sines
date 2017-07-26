@@ -56,7 +56,7 @@ public class CreateNextLevel : MonoBehaviour {
 				levelShuffler.LevelEasy++;
 			}
 			
-			if(Score >= 450 && Score < 1450){ 
+			if(Score >= 50 && Score < 1450){ 
 				
 				if(Easy){
 
