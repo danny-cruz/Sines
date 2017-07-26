@@ -105,7 +105,9 @@ public class GPG_SignIn : MonoBehaviour {
 			    }
 			    if(SignIn)
                 {
+#if !NO_GPGS
 				    PlayGamesPlatform.Instance.SignOut();
+#endif
 				    SignIn = false;
 				    PlayerPrefs.SetInt("LoggedIn", 0);
                     text.text = "Sign In";

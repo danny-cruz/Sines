@@ -109,7 +109,9 @@ public class GPG_Leaderboard : MonoBehaviour
             {
                 if (Pressed)
                 {
+#if !NO_GPGS
                     PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIlu2Nm5MWEAIQBw");
+#endif
                     Pressed = false;
                     SpriteRend.color = ButtonUpColor;
                 }

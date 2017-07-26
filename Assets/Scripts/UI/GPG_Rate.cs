@@ -79,7 +79,9 @@ public class GPG_Rate : MonoBehaviour
         {
 			if (Pressed)
             {
-                Application.OpenURL ("market://details?id=io.danielcruz.sines");			
+                #if !NO_GPGS
+                Application.OpenURL ("market://details?id=io.danielcruz.sines");	
+#endif
 				Pressed = false;
                 SpriteRend.color = ButtonUpColor;
             }

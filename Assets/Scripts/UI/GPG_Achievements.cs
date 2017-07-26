@@ -109,7 +109,9 @@ public class GPG_Achievements : MonoBehaviour
             {
                 if (GPG_signIn.SignIn)
                 {
+                    #if !NO_GPGS
 			        Social.ShowAchievementsUI();
+#endif
 				    Pressed = false;
                     SpriteRend.color = ButtonUpColor;
                 }

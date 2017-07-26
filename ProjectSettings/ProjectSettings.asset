@@ -516,9 +516,10 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    4: NO_GPGS
   platformArchitecture:
-    iOS: 2
+    iOS: 0
   scriptingBackend:
     Metro: 2
     WP8: 2

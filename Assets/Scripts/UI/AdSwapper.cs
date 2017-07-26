@@ -9,6 +9,7 @@ public class AdSwapper : MonoBehaviour {
     public GPG_SignIn SignInButton;
 	// Use this for initialization
 	void Awake () {
+#if !NO_GPGS
         PlayGamesPlatform.Activate();
         if (PlayerPrefs.GetInt("InitialLogIn") == 0 || PlayerPrefs.GetInt("LoggedIn") == 1)
         {
@@ -27,7 +28,7 @@ public class AdSwapper : MonoBehaviour {
                 PlayerPrefs.SetInt("InitialLogIn", 1);
             });
         }
-
+#endif
         if (PlayerPrefs.GetInt("highscore") < 200){
 			Show = false;
 		
