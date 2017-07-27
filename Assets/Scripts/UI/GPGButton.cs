@@ -11,7 +11,6 @@ public class GPGButton : MonoBehaviour
     public Color ButtonDownColor;
     public OptionsButton optionsButton;
     public Text ButtonText;
-    public Vector3 SubmenuScale;
     public DrawLine drawLine;
     private Vector3 StartScale;
     private Vector3 StartPosition;
@@ -167,8 +166,6 @@ public class GPGButton : MonoBehaviour
         {
             if (Pressed)
             {
-                PlayerPrefs.SetInt("LeftColor", 0);
-                PlayerPrefs.SetInt("RightColor", 0);
                 drawLine.Pressed = false;
                 Pressed = false;
                 OpenSubmenu = !OpenSubmenu;

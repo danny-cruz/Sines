@@ -38,8 +38,11 @@ public class CustomizeButton : MonoBehaviour
 
     public GameObject gpgButton;
     public GameObject exitButton;
-
+#if !NO_GPGS
     private GPGButton gpg;
+#else
+    private ResetButton gpg;
+#endif
     private ExitButton exit;
 
     private Vector2 RectTargetScale;
@@ -59,12 +62,18 @@ public class CustomizeButton : MonoBehaviour
         TextClosed = new Vector3(ButtonText.rectTransform.localPosition.x, ButtonText.rectTransform.localPosition.y, ButtonText.rectTransform.localPosition.z);
         TextOpen = new Vector3(ButtonText.rectTransform.localPosition.x, 17, ButtonText.rectTransform.localPosition.z);
 
+#if !NO_GPGS
         GPGOpenTextPosition = new Vector3(ButtonText.rectTransform.localPosition.x, 6.7f, ButtonText.rectTransform.localPosition.z);
         GPGOpenPosition = new Vector3(transform.localPosition.x, 0.0036f, transform.localPosition.z);
-
+        gpg = gpgButton.GetComponent<GPGButton>();
+#else
+        GPGOpenTextPosition = new Vector3(ButtonText.rectTransform.localPosition.x, 6.7f, ButtonText.rectTransform.localPosition.z);
+        GPGOpenPosition = new Vector3(transform.localPosition.x, 0.0036f, transform.localPosition.z);
+        gpg = gpgButton.GetComponent<ResetButton>();
+#endif
         ExitOpenTextPosition = new Vector3(ButtonText.rectTransform.localPosition.x, -15, ButtonText.rectTransform.localPosition.z);
         ExitOpenPosition = new Vector3(transform.localPosition.x, 0.0179f, transform.localPosition.z);
-        gpg = gpgButton.GetComponent<GPGButton>();
+        
         exit = exitButton.GetComponent<ExitButton>();
 
         RectBox = GetComponent<BoxCollider2D>();

@@ -517,6 +517,7 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
+    1: NO_GPGS
     4: NO_GPGS
   platformArchitecture:
     iOS: 0

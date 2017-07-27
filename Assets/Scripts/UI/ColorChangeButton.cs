@@ -36,7 +36,7 @@ public class ColorChangeButton : MonoBehaviour
     public Text ButtonText;
 
     public OptionsButton optionsButton;
-    private string RainbowText = "Spectral";
+    private string RainbowText = "Rainbow";
     private string FireText = "Fire";
     private string AirText = "Air";
     private string EarthText = "Earth";

@@ -36,7 +36,11 @@ public class ExitButton : MonoBehaviour
     private Vector3 GPGOpenTextPosition;
 
     private CustomizeButton customize;
+#if !NO_GPGS
     private GPGButton gpg;
+#else
+    private ResetButton gpg;
+#endif
 
     private Vector2 RectTargetScale;
     private Vector2 RectStartScale;
@@ -53,12 +57,15 @@ public class ExitButton : MonoBehaviour
         customize = customizeButton.GetComponent<CustomizeButton>();
         CustomizeOpenPosition = new Vector3(transform.localPosition.x, 0.1127f, transform.localPosition.z);
         CustomizeOpenTextPosition = new Vector3(transform.localPosition.x, -160, transform.localPosition.z);
-
+#if !NO_GPGS
         GPGOpenPosition = new Vector3(transform.localPosition.x, 0.107f, transform.localPosition.z);
         GPGOpenTextPosition = new Vector3(transform.localPosition.x, -151, transform.localPosition.z);
-
         gpg = gpgButton.GetComponent<GPGButton>();
-
+#else
+        GPGOpenPosition = new Vector3(transform.localPosition.x, 0.107f, transform.localPosition.z);
+        GPGOpenTextPosition = new Vector3(transform.localPosition.x, -151, transform.localPosition.z);
+        gpg = gpgButton.GetComponent<ResetButton>();
+#endif
         RectBox = GetComponent<BoxCollider2D>();
         RectTargetScale = new Vector2(10, 2.6f);
         RectStartScale = RectBox.size;
