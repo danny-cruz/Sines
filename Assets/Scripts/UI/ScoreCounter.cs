@@ -88,14 +88,19 @@ public class ScoreCounter : MonoBehaviour {
 			});
 		}
 #endif
-		if(Score >= 5000){
-				Winner = true;
-			}
+            /*
+		    if(Score >= 5000)
+            {
+			    Winner = true;
+		    }
 
-			if(Score < 5000){
-				Winner = false;
-			}
+		    if(Score < 5000)
+            {
+			    Winner = false;
+		    }
+            */
 		}
+
 
 
 		text.text = Score + " ";
