@@ -28,7 +28,10 @@ public class AdSwapper : MonoBehaviour {
                 PlayerPrefs.SetInt("InitialLogIn", 1);
             });
         }
+#else
+        Application.targetFrameRate = 60;
 #endif
+
         if (PlayerPrefs.GetInt("highscore") < 200){
 			Show = false;
 		
