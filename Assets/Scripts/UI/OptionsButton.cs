@@ -65,7 +65,7 @@ public class OptionsButton : MonoBehaviour {
 	IEnumerator OnUnpause(){
 		yield return new WaitForSeconds(0.25f);
 		XDelay = true;
-		yield return new WaitForSeconds(.15f);
+		yield return new WaitForSeconds(.125f);
 		ShadowDelay = false;
 		
 	}
