@@ -41,11 +41,6 @@ public class GameOverText : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Application.CaptureScreenshot("Screenshot.png");
-        }
         Lost = Controller.Lost;
 
 
