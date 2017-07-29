@@ -33,6 +33,7 @@ public class ResetButton : MonoBehaviour
     private ExitButton exit;
 
     public bool CustomizeOpen;
+	public GameOverText gameovertext;
 
     private int OpenSpeed = 15;
     private int CloseSpeed = 30;
@@ -159,7 +160,8 @@ public class ResetButton : MonoBehaviour
         {
             if (Pressed)
             {
-                SceneManager.LoadScene("iOS", LoadSceneMode.Single);           
+				gameovertext.StartCoroutine ("BackgroundFadeDelay");
+                          
             }
         }
     }
