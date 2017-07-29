@@ -12,7 +12,6 @@ public class Fade : MonoBehaviour
 	public bool FadeAlpha;
 	public bool FadeBlack;
     public GameOverText GameOver;
-    public ResetButton resetButton;
     public GameObject TapToContinue;
 
 	// Use this for initialization

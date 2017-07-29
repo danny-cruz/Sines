@@ -47,6 +47,7 @@ public class ResetButton : MonoBehaviour
     private Vector2 RectTargetScale;
     private Vector2 RectStartScale;
     private BoxCollider2D RectBox;
+    public GameOverText gameovertext;
 
     // Use this for initialization
     void Start()
@@ -159,7 +160,7 @@ public class ResetButton : MonoBehaviour
         {
             if (Pressed)
             {
-                SceneManager.LoadScene("iOS", LoadSceneMode.Single);           
+                gameovertext.StartCoroutine("BackgroundFadeDelay");
             }
         }
     }

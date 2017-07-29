@@ -42,9 +42,11 @@ public class GameOverText : MonoBehaviour {
 	void Update ()
     {
 
-
-			
-		Lost = Controller.Lost;
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Application.CaptureScreenshot("Screenshot.png");
+        }
+        Lost = Controller.Lost;
 
 
 			
@@ -96,6 +98,7 @@ public class GameOverText : MonoBehaviour {
         GameOver = true;
         Fade = true;
         yield return new WaitForSeconds(.3f);
+#if !NO_GPGS
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         if (AdSwapper.Show)
         {
@@ -104,7 +107,18 @@ public class GameOverText : MonoBehaviour {
                 interstitial.Show();
             }
         }
-        
+#else
+		SceneManager.LoadScene("iOS", LoadSceneMode.Single);
+         if (AdSwapper.Show)
+        {
+            if (interstitial.IsLoaded())
+            {
+                interstitial.Show();
+            }
+        }
+#endif
+
+
 
     }
 }
