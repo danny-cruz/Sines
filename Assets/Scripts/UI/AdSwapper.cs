@@ -40,11 +40,10 @@ public class AdSwapper : MonoBehaviour {
 			Show = !Show;
 		
 		}
-		/*
 		if (PlayerPrefs.GetInt("highscore") >= 5000){
 			Show = false;
 		
-		}*/
+		}
 
 	}
 	

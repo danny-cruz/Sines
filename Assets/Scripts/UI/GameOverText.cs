@@ -96,11 +96,7 @@ public class GameOverText : MonoBehaviour {
         GameOver = true;
         Fade = true;
         yield return new WaitForSeconds(.3f);
-		#if !NO_GPGS
         SceneManager.LoadScene(0, LoadSceneMode.Single);
-		#else
-		SceneManager.LoadScene("iOS", LoadSceneMode.Single);
-		#endif
         if (AdSwapper.Show)
         {
             if (interstitial.IsLoaded())
