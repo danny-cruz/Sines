@@ -137,7 +137,7 @@ PlayerSettings:
   protectGraphicsMemory: 0
   useHDRDisplay: 0
   applicationIdentifier:
-    Android: io.danielcruz.sines
+    Android: io.danielcruz.looper
     Standalone: unity.Danny Cruz.Looper
     Tizen: io.danielcruz.sines
     iOS: io.danielcruz.sines

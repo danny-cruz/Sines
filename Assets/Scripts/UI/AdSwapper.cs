@@ -7,6 +7,7 @@ public class AdSwapper : MonoBehaviour {
 	public static bool Show;
 	public static bool HideBanner;
     public GPG_SignIn SignInButton;
+    public bool AdFree;
 	// Use this for initialization
 	void Awake () {
 #if !NO_GPGS
@@ -32,14 +33,21 @@ public class AdSwapper : MonoBehaviour {
         Application.targetFrameRate = 60;
 #endif
 
-        if (PlayerPrefs.GetInt("highscore") < 200){
-			Show = false;
-		
-		}
-		if (PlayerPrefs.GetInt("highscore") >= 200 && PlayerPrefs.GetInt("highscore") < 5000){
-			Show = !Show;
-		
-		}
+        if (!AdFree)
+        {
+
+
+            if (PlayerPrefs.GetInt("highscore") < 200)
+            {
+                Show = false;
+
+            }
+            if (PlayerPrefs.GetInt("highscore") >= 200 && PlayerPrefs.GetInt("highscore") < 5000)
+            {
+                Show = !Show;
+
+            }
+        }
         /*
 		if (PlayerPrefs.GetInt("highscore") >= 5000){
 			Show = false;
