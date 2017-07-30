@@ -144,7 +144,7 @@ PlayerSettings:
     tvOS: io.danielcruz.sines
   buildNumber:
     iOS: 
-  AndroidBundleVersionCode: 10
+  AndroidBundleVersionCode: 12
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
