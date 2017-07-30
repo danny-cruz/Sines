@@ -172,7 +172,7 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 2800000, guid: 194baec5b0855ee40b18b074aa2553bf, type: 3}
+  iPhoneSplashScreen: {fileID: 2800000, guid: 958cf6d9620092d45b4a0e47939595ba, type: 3}
   iPhoneHighResSplashScreen: {fileID: 0}
   iPhoneTallHighResSplashScreen: {fileID: 0}
   iPhone47inSplashScreen: {fileID: 0}
@@ -233,7 +233,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 5761e0beffe61dc45b0aa299deeb0b40, type: 3}
+      m_Icon: {fileID: 2800000, guid: 958cf6d9620092d45b4a0e47939595ba, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching:
