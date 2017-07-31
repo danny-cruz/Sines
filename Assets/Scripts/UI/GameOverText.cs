@@ -42,8 +42,6 @@ public class GameOverText : MonoBehaviour {
 	void Update ()
     {
         Lost = Controller.Lost;
-
-
 			
 		if(Lost && !FadeStart)
         {
@@ -51,9 +49,6 @@ public class GameOverText : MonoBehaviour {
 			StartCoroutine("TextFadeIn");
 		}
 	
-
-	
-
 		if(Fade)
         {
             if (!GameOver)

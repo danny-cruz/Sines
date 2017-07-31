@@ -39,25 +39,26 @@ public class Baby : MonoBehaviour
         Lost = Controller.Lost;
         Pause = OptionsButton.Pause;
 
-		if(!Pause && !Lost)
+        if (Pause || Lost)
         {
-		    if(Activate)
-            {   
-                if(Player.transform.position.y > transform.position.y + 75)
-                {
-                    ResetPositions();
-                }
+            return;
+        }
+		if(Activate)
+        {   
+            if(Player.transform.position.y > transform.position.y + 75)
+            {
+                ResetPositions();
+            }
 
-			    Point1.transform.position = Vector3.Lerp(Point1.transform.position, Point1Target.transform.position, Time.deltaTime * Speed);
-			    Point2.transform.position = Vector3.Lerp(Point2.transform.position, Point2Target.transform.position, Time.deltaTime * Speed);
+			Point1.transform.position = Vector3.Lerp(Point1.transform.position, Point1Target.transform.position, Time.deltaTime * Speed);
+			Point2.transform.position = Vector3.Lerp(Point2.transform.position, Point2Target.transform.position, Time.deltaTime * Speed);
 			
-		        if(Vector3.Distance(Point1.transform.position, Point1Target.transform.position) < .5f)
-                {
-		            Point1Baby.transform.localScale = Vector3.Lerp(Point1Baby.transform.localScale, TargetScale, Time.deltaTime * Speed);
-		            Point2Baby.transform.localScale = Vector3.Lerp(Point2Baby.transform.localScale, TargetScale, Time.deltaTime * Speed);
-		        }
+		    if(Vector3.Distance(Point1.transform.position, Point1Target.transform.position) < .5f)
+            {
+		        Point1Baby.transform.localScale = Vector3.Lerp(Point1Baby.transform.localScale, TargetScale, Time.deltaTime * Speed);
+		        Point2Baby.transform.localScale = Vector3.Lerp(Point2Baby.transform.localScale, TargetScale, Time.deltaTime * Speed);
 		    }
-	    }
+		}
 	}
 	void OnTriggerEnter2D(Collider2D other)
     {

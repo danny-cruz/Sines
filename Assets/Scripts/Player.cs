@@ -18,7 +18,7 @@ public class Player : MonoBehaviour {
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 1, Time.deltaTime * .5f);
 		}
 
-		if(Speed)
+		else if(Speed)
         {
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 4, Time.deltaTime );
 		}

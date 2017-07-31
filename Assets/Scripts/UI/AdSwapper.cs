@@ -33,20 +33,19 @@ public class AdSwapper : MonoBehaviour {
         Application.targetFrameRate = 60;
 #endif
 
-        if (!AdFree)
+        if (AdFree)
         {
+            return;
+        }
+        if (PlayerPrefs.GetInt("highscore") < 200)
+        {
+            Show = false;
 
+        }
+        else if (PlayerPrefs.GetInt("highscore") >= 200 && PlayerPrefs.GetInt("highscore") < 5000)
+        {
+            Show = !Show;
 
-            if (PlayerPrefs.GetInt("highscore") < 200)
-            {
-                Show = false;
-
-            }
-            if (PlayerPrefs.GetInt("highscore") >= 200 && PlayerPrefs.GetInt("highscore") < 5000)
-            {
-                Show = !Show;
-
-            }
         }
         /*
 		if (PlayerPrefs.GetInt("highscore") >= 5000){

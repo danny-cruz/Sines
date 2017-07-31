@@ -73,110 +73,113 @@ public class Controller : MonoBehaviour {
 		FirstSpin = false;
 	}
 	// Update is called once per frame
-	void Update () {
-	
-
-
+	void Update ()
+    {
 		Pause = OptionsButton.Pause;
-		if(!Pause){
+        if (Pause)
+        {
+            return;
+        }
+
 		PointPos1 = Point1.transform.position;
 		PointPos2 = Point2.transform.position;
 
-		if(SpeedUp){
-				SpeedMod = 25;
-				SpeedUp = false;
-			}
+		if(SpeedUp)
+        {
+			SpeedMod = 25;
+			SpeedUp = false;
+		}
 	
-			if(SpeedMod >0){
-				SpeedMod -= 1 * Time.deltaTime * 5;
-			}
+		if(SpeedMod >0)
+        {
+			SpeedMod -= 1 * Time.deltaTime * 5;
+		}
 		Lost = PlayerPoint.Lost;
-		
 
-		if(Point1.transform.position.y >=0){
-			if(!begin){
-					StartCoroutine("FirstRot");
-			begin = true;
-				
-					Score.enabled = true;
+		if(Point1.transform.position.y >=0)
+        {
+			if(!begin)
+            {
+				StartCoroutine("FirstRot");
+			    begin = true;				
+				Score.enabled = true;
 				Blocker1.SetActive(false);
 				Blocker2.SetActive(false);
-
 			}
 		}
 
-	
-		
-
-		if(!begin && !Lost){
-			if(!Pause){
-			if(RotateForward){
+		if(!begin && !Lost)
+        {
+			if(!Pause)
+            {
+			    if(RotateForward)
+                {
 					MiddlePoint1.transform.Rotate(Vector3.forward * 3);
 					MiddlePoint2.transform.Rotate(Vector3.forward * -3);
 				}
-			if(!RotateForward){
+			    if(!RotateForward)
+                {
 					MiddlePoint1.transform.localRotation = Quaternion.Slerp(MiddlePoint1.transform.localRotation, Quaternion.Euler(0,0,0), 2 * Time.deltaTime);
 					MiddlePoint2.transform.localRotation = Quaternion.Slerp(MiddlePoint2.transform.localRotation, Quaternion.Euler(0,0,0), 2 * Time.deltaTime);
 				}
 		
-			if(Input.GetButtonDown("Touch")){
-					RotateForward = true;
+			    if(Input.GetButtonDown("Touch"))
+                {
+					    RotateForward = true;
+			    }
+
+			    if(Input.GetButtonUp("Touch"))
+                {
+					    RotateForward = false;
+
+			    }
 			}
-
-			if(Input.GetButtonUp("Touch")){
-					RotateForward = false;
-
+		}
+		else if(begin && Lost)
+        {
+			if(Input.GetButtonDown("Touch"))
+            {
+				begin = false;
+				Fader.FadeAlpha = false;
+				Fader.FadeBlack = true;
 			}
-				}
+            MoveSpeed = 0;
+        }
 
-		}
-
-		if(begin && Lost){
-
-				if(Input.GetButtonDown("Touch")){
-					begin = false;
-					Fader.FadeAlpha = false;
-					Fader.FadeBlack = true;
-				}
-		}
-
-
-		if(Lost){
-			MoveSpeed = 0;
-		}
-
-		if(begin && !Lost){
+		else if(begin && !Lost)
+        {
 			MoveSpeed = 25 + SpeedMod;
-		transform.position += Vector3.up * Time.deltaTime * MoveSpeed ;
+		    transform.position += Vector3.up * Time.deltaTime * MoveSpeed ;
 
-		if(!Input.GetButton("Touch") && !FirstSpin){
+		    if(!Input.GetButton("Touch") && !FirstSpin)
+            {
 		
 			Speed = Mathf.Lerp(Speed, StartSpeed, Time.deltaTime * 3);
 			CenterPoint1.transform.position = Vector3.Lerp(CenterPoint1.transform.position, AnchorPoint2.transform.position, Time.deltaTime * Speed * 1.5f);
 			CenterPoint2.transform.position = Vector3.Lerp(CenterPoint2.transform.position, AnchorPoint1.transform.position, Time.deltaTime * Speed * 1.5f);
 
-		}
+		    }
 	
-		Point1.transform.position = Vector3.Lerp(Point1.transform.position, CenterPoint1.transform.position, Time.deltaTime * Speed);
-		Point2.transform.position = Vector3.Lerp(Point2.transform.position, CenterPoint2.transform.position, Time.deltaTime * Speed);
+		    Point1.transform.position = Vector3.Lerp(Point1.transform.position, CenterPoint1.transform.position, Time.deltaTime * Speed);
+		    Point2.transform.position = Vector3.Lerp(Point2.transform.position, CenterPoint2.transform.position, Time.deltaTime * Speed);
 
 
-		if(Input.GetButton("Touch")||FirstSpin){
+		    if(Input.GetButton("Touch")||FirstSpin)
+            {
 
-			TangentSine  = Mathf.PingPong(Time.time* .2f, .8f);
-			Speed = Mathf.Lerp(Speed, StartSpeed, Time.deltaTime * 12);
-			CenterPoint1.transform.position = Vector3.Lerp(CenterPoint1.transform.position, TangentPoint1.transform.position, Time.deltaTime * Speed);
-			CenterPoint2.transform.position = Vector3.Lerp(CenterPoint2.transform.position, TangentPoint2.transform.position, Time.deltaTime * Speed);
+			    TangentSine  = Mathf.PingPong(Time.time* .2f, .8f);
+			    Speed = Mathf.Lerp(Speed, StartSpeed, Time.deltaTime * 12);
+			    CenterPoint1.transform.position = Vector3.Lerp(CenterPoint1.transform.position, TangentPoint1.transform.position, Time.deltaTime * Speed);
+			    CenterPoint2.transform.position = Vector3.Lerp(CenterPoint2.transform.position, TangentPoint2.transform.position, Time.deltaTime * Speed);
 		
-		}
-		if(Input.GetButtonUp("Touch") &&!FirstSpin){
-			Speed = StartSpeed;
+		    }
+		    if(Input.GetButtonUp("Touch") &&!FirstSpin)
+            {
+			    Speed = StartSpeed;
 		
 
 			}
 		}
-	
-	}
 	}
 
 

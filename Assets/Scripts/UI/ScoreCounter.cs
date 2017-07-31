@@ -57,32 +57,32 @@ public class ScoreCounter : MonoBehaviour {
 			});
 		}
 
-		if(Score >= 500 && Score < 1000){
+		else if(Score >= 500 && Score < 1000){
 			Social.ReportProgress(Achievement500, 100.0f, (bool success) => {
 				// handle success or failure
 			});
 		}
 
-		if(Score >= 1000 && Score < 2000){
+		else if(Score >= 1000 && Score < 2000){
 			Social.ReportProgress(Achievement1000, 100.0f, (bool success) => {
 				// handle success or failure
 			});
 		}
 
-		if(Score >= 2000 && Score < 3000){
-			Social.ReportProgress(Achievement3000, 100.0f, (bool success) => {
+		else if(Score >= 2000 && Score < 3000){
+			Social.ReportProgress(Achievement2000, 100.0f, (bool success) => {
 				// handle success or failure
 			});
 						
 		}
 
-		if(Score >= 3000 && Score < 5000){
+		else if(Score >= 3000 && Score < 5000){
 			Social.ReportProgress(Achievement3000, 100.0f, (bool success) => {
 				// handle success or failure
 			});
 		}
 
-		if(Score >= 5000){
+		else if(Score >= 5000){
 			Social.ReportProgress(Achievement5000, 100.0f, (bool success) => {
 				// handle success or failure
 			});

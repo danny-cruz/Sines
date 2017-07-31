@@ -136,7 +136,8 @@ public class OptionsButton : MonoBehaviour {
 
 
 
-        if (open){
+        if (open)
+        {
             if (!Menu.activeSelf)
             {
                 Menu.SetActive(true);
@@ -157,7 +158,8 @@ public class OptionsButton : MonoBehaviour {
 
 		}
 
-		if(!open){
+		else if(!open)
+        {
             ScoreShadow.effectColor = Color.Lerp(ScoreShadow.effectColor, ShadowColor, Time.deltaTime * 4);
             if (XDelay)
             {
