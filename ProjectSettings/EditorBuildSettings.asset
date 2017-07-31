@@ -11,6 +11,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/iOS.unity
     guid: 2fa4562fd495cd846a526fd941864b33
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ad Free.unity
     guid: ebea15cd9644c2e4683e988362d2e097

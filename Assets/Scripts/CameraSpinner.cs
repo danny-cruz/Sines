@@ -30,27 +30,31 @@ public class CameraSpinner : MonoBehaviour {
 	void Update ()
     {
 		Pause = OptionsButton.Pause;
-		if(!Controller.Lost)
+        if (Controller.Lost)
         {
-	        if(!Pause)
+            return;
+        }
+	    if(!Pause)
+        {
+		    if(SpinRight)
             {
-		        if(SpinRight)
-                {
-	                RotSpeed = Mathf.Lerp(RotSpeed, Speed, Time.deltaTime);
-                    MainCam.transform.Rotate(Vector3.forward * RotSpeed);
-                }
+	            RotSpeed = Mathf.Lerp(RotSpeed, Speed, Time.deltaTime);
+                MainCam.transform.Rotate(Vector3.forward * RotSpeed);
+            }
 
-		        if(SpinLeft)
-                {
-	                RotSpeed = Mathf.Lerp(RotSpeed, -Speed, Time.deltaTime);
-                    MainCam.transform.Rotate(Vector3.forward * RotSpeed);
-                }
+		    else if(SpinLeft)
+            {
+	            RotSpeed = Mathf.Lerp(RotSpeed, -Speed, Time.deltaTime);
+                MainCam.transform.Rotate(Vector3.forward * RotSpeed);
+            }
 
-		        if(!SpinLeft && !SpinRight)
+		    else if(!SpinLeft && !SpinRight)
+            {
+			    RotSpeed =0;
+                if (MainCam.transform.rotation != Quaternion.Euler(0, 0, 0))
                 {
-			        RotSpeed =0;
-			        MainCam.transform.rotation = Quaternion.Lerp(MainCam.transform.rotation, Quaternion.Euler(0,0,0), Time.deltaTime * Speed * 2);
-		        }
+                    MainCam.transform.rotation = Quaternion.Lerp(MainCam.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * Speed * 2);
+                }
 		    }
 		}
 	}
@@ -84,7 +88,7 @@ public class CameraSpinner : MonoBehaviour {
 			StartCoroutine("RotateCam");
 			}
 
-			if(!RightStart)
+			else if(!RightStart)
             {
 				StartCoroutine("RotateCam2");
 			}
