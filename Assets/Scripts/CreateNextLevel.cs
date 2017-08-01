@@ -33,9 +33,7 @@ public class CreateNextLevel : MonoBehaviour {
 
 
 
-		if(Player.transform.position.y > EndPoint.transform.position.y + 50){
-            transform.parent.gameObject.SetActive(false);
-		}
+	
 	}
 
 	void OnTriggerEnter2D(Collider2D other){

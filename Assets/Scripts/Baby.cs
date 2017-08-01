@@ -45,9 +45,10 @@ public class Baby : MonoBehaviour
         }
 		if(Activate)
         {   
-            if(Player.transform.position.y > transform.position.y + 75)
+            if(Player.transform.position.y > transform.position.y + 175)
             {
                 ResetPositions();
+                transform.parent.gameObject.SetActive(false);
             }
 
 			Point1.transform.position = Vector3.Lerp(Point1.transform.position, Point1Target.transform.position, Time.deltaTime * Speed);
