@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class HighScoreText : MonoBehaviour {
-	Text text;
+    TextMeshProUGUI text;
 	public Color Alpha;
 	public Color Gray;
 	public float Speed;
@@ -11,21 +12,21 @@ public class HighScoreText : MonoBehaviour {
 	private Controller controller;
 	public int Score;
     public GameOverText GameOver;
-    public OptionsButton optionsButton;
-
+    public UI_OptionsButton optionsButton;
+    private Animator myAnimator;
 	// Use this for initialization
 	void Start ()
     {
 		controller = ControllerObject.GetComponent<Controller>();
-		text = GetComponent<Text>();
-
-	}
+        text = GetComponent<TextMeshProUGUI>();
+        myAnimator = GetComponent<Animator>();
+    }
 	
 
 	// Update is called once per frame
 	void Update ()
     {
-
+        /*
         if (GameOver.Fade)
         {
             if (text.color != Gray)
@@ -42,17 +43,17 @@ public class HighScoreText : MonoBehaviour {
                     text.color = Color.Lerp(text.color, Alpha, Time.deltaTime * Speed * 2);
                 }
             }
-            else if (!optionsButton.xDelay)
+            else if (optionsButton.Open)
             {
-                if (text.color != Gray)
-                { 
-                    text.color = Color.Lerp(text.color, Gray, Time.deltaTime * Speed);
-                }
+              // myAnimator.Play("FadeIn");
             }
 		}
-        if (text.color != Alpha)
+        */
+        if (GameOver.Fade)
         {
-            text.text = "High Score: " + PlayerPrefs.GetInt("highscore", 0);
+            myAnimator.SetTrigger("Lost");
         }
+
+        text.text = "High Score: " + PlayerPrefs.GetInt("highscore", 0);
 	}
 }

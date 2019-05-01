@@ -126,7 +126,7 @@ public class ColorChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OptionsButton.Pause)
+        if (UI_OptionsButton.Pause)
         {
             StopCoroutine("StartSequence");
             return;

@@ -32,7 +32,7 @@ public class DrawLine : MonoBehaviour
     public Color Grey;
     public Color White;
     public Color Alpha;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
     public float Speed;
 
     public bool Pressed;

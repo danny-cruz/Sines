@@ -3,10 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
+using TMPro;
 
 public class ScoreCounter : MonoBehaviour {
-	Text text;
-	private string Achievement100 = "CgkIlu2Nm5MWEAIQAQ";
+    private TextMeshProUGUI text;
+    private string Achievement100 = "CgkIlu2Nm5MWEAIQAQ";
 	private string Achievement500 = "CgkIlu2Nm5MWEAIQAg";
 	private string Achievement1000 = "CgkIlu2Nm5MWEAIQAw";
 	private string Achievement2000 = "CgkIlu2Nm5MWEAIQBA";
@@ -18,15 +19,15 @@ public class ScoreCounter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	//	controller = Controller.GetComponent<Controller>();
-		text = GetComponent<Text>();
-		InvokeRepeating("AddOne", 0, .1f);
+        //	controller = Controller.GetComponent<Controller>();
+        text = GetComponent<TextMeshProUGUI>();
+        InvokeRepeating("AddOne", 0, .1f);
 
 	}
 
 	void AddOne (){
 		if(!Controller.Lost){
-		if(!OptionsButton.Pause){
+		if(!UI_OptionsButton.Pause){
 		Score+=1;
 			}
 		}
@@ -103,6 +104,6 @@ public class ScoreCounter : MonoBehaviour {
 
 
 
-		text.text = Score + " ";
-	}
+        text.text = Score.ToString();
+    }
 }

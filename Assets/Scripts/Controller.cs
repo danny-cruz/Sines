@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class Controller : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class Controller : MonoBehaviour {
 	public GameObject MiddlePoint2;
 	public GameObject Blocker1;
 	public GameObject Blocker2;
+    //public GameObject OptionsButton;
 
 	private ScoreCounter Score;
 	public GameObject ScoreCount;
@@ -75,13 +77,21 @@ public class Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		Pause = OptionsButton.Pause;
+		Pause = UI_OptionsButton.Pause;
         if (Pause)
         {
             return;
         }
 
-		PointPos1 = Point1.transform.position;
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Check if the mouse was clicked over a UI element
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+        }
+        PointPos1 = Point1.transform.position;
 		PointPos2 = Point2.transform.position;
 
 		if(SpeedUp)

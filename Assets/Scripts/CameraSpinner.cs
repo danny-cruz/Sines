@@ -29,7 +29,7 @@ public class CameraSpinner : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		Pause = OptionsButton.Pause;
+		Pause = UI_OptionsButton.Pause;
         if (Controller.Lost)
         {
             return;

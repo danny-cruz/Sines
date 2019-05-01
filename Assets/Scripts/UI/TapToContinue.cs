@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TapToContinue : MonoBehaviour {
 
     public float Speed;
-    private Text text;
+    private TextMeshProUGUI text;
     private bool Delayed = false;
     public Color TargetColor;
     private Color Alpha;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
 
     // Use this for initialization
     void Start () {
-        text = GetComponent<Text>();
+        text = GetComponent<TextMeshProUGUI>();
         Alpha = text.color;
         StartCoroutine("Delay");
     }
@@ -26,7 +27,7 @@ public class TapToContinue : MonoBehaviour {
         {
             text.color = Color.Lerp(text.color, Alpha, Time.deltaTime * 15);
         }
-        else if (text.color != TargetColor && Delayed && optionsButton.XDelay)
+        else if (text.color != TargetColor && Delayed && optionsButton.xDelay)
         {
             text.color = Color.Lerp(text.color, TargetColor, Time.deltaTime * Speed);
         }

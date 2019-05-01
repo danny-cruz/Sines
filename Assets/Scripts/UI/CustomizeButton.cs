@@ -8,7 +8,7 @@ public class CustomizeButton : MonoBehaviour
 
     public Color ButtonUpColor;
     public Color ButtonDownColor;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
     public Text ButtonText;
     public Vector3 SubmenuScale;
     public DrawLine drawLine;

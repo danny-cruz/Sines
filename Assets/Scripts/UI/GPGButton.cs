@@ -9,7 +9,7 @@ public class GPGButton : MonoBehaviour
     public Color Alpha;
     public Color ButtonUpColor;
     public Color ButtonDownColor;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
     public Text ButtonText;
     public DrawLine drawLine;
     private Vector3 StartScale;

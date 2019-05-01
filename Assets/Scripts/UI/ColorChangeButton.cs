@@ -35,7 +35,7 @@ public class ColorChangeButton : MonoBehaviour
     private SpriteRenderer SpriteRend;
     public Text ButtonText;
 
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
     private string RainbowText = "Rainbow";
     private string FireText = "Fire";
     private string AirText = "Air";

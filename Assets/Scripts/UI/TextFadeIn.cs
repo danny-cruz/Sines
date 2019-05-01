@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class TextFadeIn : MonoBehaviour {
-	private Text text;
+	private TextMeshProUGUI text;
 	public Color White;
 	public Color Alpha;
     public Controller controller;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
 	public float Speed;
 	private bool FadeIn = false;
 	// Use this for initialization
 	void Start () {
-		text = GetComponent<Text>();
+		text = GetComponent<TextMeshProUGUI>();
         StartCoroutine("Delay");
     }
 

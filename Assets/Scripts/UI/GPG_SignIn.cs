@@ -7,7 +7,7 @@ public class GPG_SignIn : MonoBehaviour {
     public Color Alpha;
     public Color ButtonUpColor;
     public Color ButtonDownColor;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
 
     public bool SignIn;
 	public int StaySignedIn;

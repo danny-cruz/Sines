@@ -20,7 +20,7 @@ public class ColorCopy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (!OptionsButton.Pause)
+        if (!UI_OptionsButton.Pause)
         {
             if ((ColorC.IsDark || ColorC.IsLight) && Radial)
             {

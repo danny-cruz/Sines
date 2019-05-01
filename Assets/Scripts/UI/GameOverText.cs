@@ -5,6 +5,7 @@ using System;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverText : MonoBehaviour {
 	public bool Fade;
@@ -15,14 +16,14 @@ public class GameOverText : MonoBehaviour {
 	private bool BannerOn;
     public Color Alpha;
     public Color Gray;
-	private Text text;
+	private TextMeshProUGUI text;
 	public bool Lost;
     public bool GameOver;
     public Controller controller;
     private bool FadeStart;
     public float Speed;
-    public OptionsButton optionsButton;
-
+    public UI_OptionsButton optionsButton;
+    public Fade Fader;
 
 	// Use this for initialization
 	void Awake () {
@@ -34,7 +35,7 @@ public class GameOverText : MonoBehaviour {
 		
 		// Load the interstitial with the request.
 	
-		text = GetComponent<Text>();
+		text = GetComponent<TextMeshProUGUI>();
 
 	}
 	
@@ -51,13 +52,14 @@ public class GameOverText : MonoBehaviour {
 	
 		if(Fade)
         {
+            Fader.FadeBlack = true;
             if (!GameOver)
             {
                 if (optionsButton.Open)
                 {
                     text.color = Color.Lerp(text.color, Alpha, Time.deltaTime * 15.0f);
                 }
-                else if (optionsButton.XDelay)
+                else if (optionsButton.xDelay)
                 {
                     if (text.color != Gray)
                     {
@@ -69,7 +71,7 @@ public class GameOverText : MonoBehaviour {
 
             if (Input.GetButtonDown("Touch"))
             {
-                if (!OptionsButton.Pause)
+                if (!UI_OptionsButton.Pause)
                 {            
                     StartCoroutine("BackgroundFadeDelay");   
                 }

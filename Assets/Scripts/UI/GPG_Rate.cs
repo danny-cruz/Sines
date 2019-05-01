@@ -8,7 +8,7 @@ public class GPG_Rate : MonoBehaviour
     public Color Alpha;
     public Color ButtonUpColor;
     public Color ButtonDownColor;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
     public Text text;
     public SpriteRenderer IconSpriteRend;
 

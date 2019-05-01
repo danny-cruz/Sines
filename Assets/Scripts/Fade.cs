@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Fade : MonoBehaviour
 {
@@ -7,36 +8,36 @@ public class Fade : MonoBehaviour
     public Color Gray;
 	public Color Alpha;
 	public float Speed;
-	private SpriteRenderer SpriteRend;
+	private Image image;
 	public float DelayCount;
 	public bool FadeAlpha;
 	public bool FadeBlack;
-    public GameOverText GameOver;
     public GameObject TapToContinue;
 
 	// Use this for initialization
 	void Start ()
     {
         StartCoroutine("Delay");
-		SpriteRend = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (GameOver.Fade)
+
+        if (FadeBlack)
         {
             TapToContinue.SetActive(true);
             FadeAlpha = false;
-            SpriteRend.color = Color.Lerp(SpriteRend.color, Black, Time.deltaTime * Speed *.75f);
+            image.color = Color.Lerp(image.color, Black, Time.deltaTime * Speed *.75f);
         }
         if (FadeAlpha)
         {
-	        SpriteRend.color = Color.Lerp(SpriteRend.color, Alpha, Time.deltaTime * 5);
-	    }
-
-	    
+            FadeBlack = false;
+            image.color = Color.Lerp(image.color, Alpha, Time.deltaTime * 3);
+	    }    
 	}
+
     private IEnumerator Delay ()
     {
         yield return new WaitForSeconds(DelayCount);

@@ -7,7 +7,7 @@ public class XButton : MonoBehaviour {
     public GameObject Point1;
     public GameObject Point2;
     public GameObject Point3;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
 
     private Vector3 OpenTarget1;
     private Vector3 OpenTarget2;
@@ -54,7 +54,7 @@ public class XButton : MonoBehaviour {
             PointLerp3 = Vector3.Lerp(Point3.transform.localPosition, Vector3.zero, Time.deltaTime * 20);
             ScaleLerp3 = Vector3.Lerp(Point3.transform.localScale, OpenScale3, Time.deltaTime * 20);
 
-            if (!optionsButton.XDelay)
+            if (!optionsButton.xDelay)
             {
                 PointLerp1 = Vector3.Lerp(Point1.transform.localPosition, OpenTarget1, Time.deltaTime * 8);
                 PointLerp2 = Vector3.Lerp(Point2.transform.localPosition, OpenTarget2, Time.deltaTime * 8);
@@ -62,13 +62,13 @@ public class XButton : MonoBehaviour {
         }
         else if (!optionsButton.Open)
         {
-            if (optionsButton.XDelay)
+            if (optionsButton.xDelay)
             {
                 PointLerp1 = Vector3.Lerp(Point1.transform.localPosition, Vector3.zero, Time.deltaTime * 20);
                 PointLerp2 = Vector3.Lerp(Point2.transform.localPosition, Vector3.zero, Time.deltaTime * 20);
 
             }
-
+            /*
             if (!optionsButton.shadowDelay)
             {
                 
@@ -77,6 +77,7 @@ public class XButton : MonoBehaviour {
                 PointLerp3 = Vector3.Lerp(Point3.transform.localPosition, OpenStart3, Time.deltaTime * 20);
 
             }
+            */
         }
         Line.SetPosition(0, Point1.transform.position);
         Line.SetPosition(1, Point2.transform.position);

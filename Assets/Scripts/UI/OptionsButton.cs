@@ -6,8 +6,8 @@ using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms;
 
 public class OptionsButton : MonoBehaviour {
-	private bool open;
-    public bool Open { get { return open; } }
+	//private bool Open;
+    public bool Open;
 	public GameObject XButton;
 	public GameObject CircleButton;
 	public GameObject ShadowButton;
@@ -21,7 +21,7 @@ public class OptionsButton : MonoBehaviour {
 	public float Speed;
 	private Quaternion TargetRotation;
 	private Quaternion StartRotation;
-	public static bool Pause;
+	public bool Pause;
 	public Controller controller;
 	public bool FlowLevel;
 	public bool ArcadeLevel;
@@ -73,7 +73,7 @@ public class OptionsButton : MonoBehaviour {
 	IEnumerator Unpause (){
 		yield return new WaitForSeconds(.75f);
 		Pause = false;
-		open = false;
+		Open = false;
 	
 	}
 
@@ -82,7 +82,7 @@ public class OptionsButton : MonoBehaviour {
 	IEnumerator UnpauseFast (){
 		yield return new WaitForSeconds(0.2f);
 		Pause = false;
-		open = false;
+		Open = false;
 
 	
 	}
@@ -91,7 +91,7 @@ public class OptionsButton : MonoBehaviour {
         if (controller.Begin)
         {
             Pause = true;
-            open = true;
+            Open = true;
             XDelay = false;
             CircleButton.transform.localScale = TargetScale;
             if (!Menu.activeSelf)
@@ -107,11 +107,9 @@ public class OptionsButton : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (open)
+            if (Open)
             {
                 StartCoroutine("OnUnpause");
                 if (controller.Begin)
@@ -126,17 +124,17 @@ public class OptionsButton : MonoBehaviour {
                 }
 
             }
-            else if (!open)
+            else if (!Open)
             {
                 StartCoroutine("OnPause");
             }
-            open = !open;
+            Open = !Open;
         }
 
 
 
 
-        if (open)
+        if (Open)
         {
             if (!Menu.activeSelf)
             {
@@ -158,7 +156,7 @@ public class OptionsButton : MonoBehaviour {
 
 		}
 
-		else if(!open)
+		else if(!Open)
         {
             ScoreShadow.effectColor = Color.Lerp(ScoreShadow.effectColor, ShadowColor, Time.deltaTime * 4);
             if (XDelay)
@@ -189,27 +187,33 @@ public class OptionsButton : MonoBehaviour {
 		//controller.DontPlay = true;
 		if(Input.GetButtonDown("Touch"))
         {
-			if(open)
-            {
-				StartCoroutine("OnUnpause");
-				if(controller.Begin)
-                {
-				    StartCoroutine("Unpause");
-				}
-				if(!controller.Begin)
-                {
+            OnClick();
 
-				    StartCoroutine("UnpauseFast");
-				
-			    }
-
-		    }
-			else if(!open)
-            {
-				StartCoroutine("OnPause");
-			}
-		    open = !open;
-		}
+        }
 	}
+
+    public void OnClick()
+    {
+        if (Open)
+        {
+            StartCoroutine("OnUnpause");
+            if (controller.Begin)
+            {
+                StartCoroutine("Unpause");
+            }
+            if (!controller.Begin)
+            {
+
+                StartCoroutine("UnpauseFast");
+
+            }
+
+        }
+        else if (!Open)
+        {
+            StartCoroutine("OnPause");
+        }
+        Open = !Open;
+    }
 
 }

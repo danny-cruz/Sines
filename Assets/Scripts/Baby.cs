@@ -37,7 +37,7 @@ public class Baby : MonoBehaviour
 	void Update ()
     {
         Lost = Controller.Lost;
-        Pause = OptionsButton.Pause;
+        Pause = UI_OptionsButton.Pause;
 
         if (Pause || Lost)
         {

@@ -10,7 +10,7 @@ public class GPG_Achievements : MonoBehaviour
     public Color ButtonDownColor;
     public Color AlphaGrey;
     public Color Grey;
-    public OptionsButton optionsButton;
+    public UI_OptionsButton optionsButton;
     public GPGButton gpgButton;
     public GPG_SignIn GPG_signIn;
     public Text text;
