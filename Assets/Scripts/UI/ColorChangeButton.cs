@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ColorChangeButton : MonoBehaviour
 {
 
+    public bool Chinese;
     public ColorChange Point1;
     public ColorChange Point2;
     public SineColor Sine0;
@@ -45,6 +46,15 @@ public class ColorChangeButton : MonoBehaviour
     private string OrderText = "Order";
     private string ChaosText = "Chaos";
 
+    private string RainbowTextChinese = "彩虹";
+    private string FireTextChinese = "火";
+    private string AirTextChinese = "空气";
+    private string EarthTextChinese = "地球";
+    private string WaterTextChinese = "水";
+    private string AetherTextChinese = "醚";
+    private string OrderTextChinese = "订购";
+    private string ChaosTextChinese = "混沌";
+
     public int ColorIndex1;
     public int ColorIndex2;
 
@@ -56,75 +66,150 @@ public class ColorChangeButton : MonoBehaviour
     // Use this for initialization
     void Start () {
 
-
-        if (Left)
+        if (!Chinese)
         {
-            if (PlayerPrefs.GetInt("LeftColor") == 0)
+            if (Left)
             {
-                ButtonText.text = RainbowText;
+                if (PlayerPrefs.GetInt("LeftColor") == 0)
+                {
+                    ButtonText.text = RainbowText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 1)
+                {
+                    ButtonText.text = FireText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 2)
+                {
+                    ButtonText.text = AirText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 3)
+                {
+                    ButtonText.text = EarthText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 4)
+                {
+                    ButtonText.text = WaterText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 5)
+                {
+                    ButtonText.text = AetherText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 6)
+                {
+                    ButtonText.text = ChaosText;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 7)
+                {
+                    ButtonText.text = OrderText;
+                }
             }
-            else if (PlayerPrefs.GetInt("LeftColor") == 1)
+            else if (!Left)
             {
-                ButtonText.text = FireText;
-            }
-            else if (PlayerPrefs.GetInt("LeftColor") == 2)
-            {
-                ButtonText.text = AirText;
-            }
-            else if (PlayerPrefs.GetInt("LeftColor") == 3)
-            {
-                ButtonText.text = EarthText;
-            }
-            else if (PlayerPrefs.GetInt("LeftColor") == 4)
-            {
-                ButtonText.text = WaterText;
-            }
-            else if (PlayerPrefs.GetInt("LeftColor") == 5)
-            {
-                ButtonText.text = AetherText;
-            }
-            else if (PlayerPrefs.GetInt("LeftColor") == 6)
-            {
-                ButtonText.text = ChaosText;
-            }
-            else if (PlayerPrefs.GetInt("LeftColor") == 7)
-            {
-                ButtonText.text = OrderText;
+                if (PlayerPrefs.GetInt("RightColor") == 0)
+                {
+                    ButtonText.text = RainbowText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 1)
+                {
+                    ButtonText.text = FireText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 2)
+                {
+                    ButtonText.text = AirText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 3)
+                {
+                    ButtonText.text = EarthText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 4)
+                {
+                    ButtonText.text = WaterText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 5)
+                {
+                    ButtonText.text = AetherText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 6)
+                {
+                    ButtonText.text = ChaosText;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 7)
+                {
+                    ButtonText.text = OrderText;
+                }
             }
         }
-        else if (!Left)
+        else if (Chinese)
         {
-            if (PlayerPrefs.GetInt("RightColor") == 0)
+            if (Left)
             {
-                ButtonText.text = RainbowText;
+                if (PlayerPrefs.GetInt("LeftColor") == 0)
+                {
+                    ButtonText.text = RainbowTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 1)
+                {
+                    ButtonText.text = FireTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 2)
+                {
+                    ButtonText.text = AirTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 3)
+                {
+                    ButtonText.text = EarthTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 4)
+                {
+                    ButtonText.text = WaterTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 5)
+                {
+                    ButtonText.text = AetherTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 6)
+                {
+                    ButtonText.text = ChaosTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("LeftColor") == 7)
+                {
+                    ButtonText.text = OrderTextChinese;
+                }
             }
-            else if (PlayerPrefs.GetInt("RightColor") == 1)
+            else if (!Left)
             {
-                ButtonText.text = FireText;
-            }
-            else if (PlayerPrefs.GetInt("RightColor") == 2)
-            {
-                ButtonText.text = AirText;
-            }
-            else if (PlayerPrefs.GetInt("RightColor") == 3)
-            {
-                ButtonText.text = EarthText;
-            }
-            else if (PlayerPrefs.GetInt("RightColor") == 4)
-            {
-                ButtonText.text = WaterText;
-            }
-            else if (PlayerPrefs.GetInt("RightColor") == 5)
-            {
-                ButtonText.text = AetherText;
-            }
-            else if (PlayerPrefs.GetInt("RightColor") == 6)
-            {
-                ButtonText.text = ChaosText;
-            }
-            else if (PlayerPrefs.GetInt("RightColor") == 7)
-            {
-                ButtonText.text = OrderText;
+                if (PlayerPrefs.GetInt("RightColor") == 0)
+                {
+                    ButtonText.text = RainbowTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 1)
+                {
+                    ButtonText.text = FireTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 2)
+                {
+                    ButtonText.text = AirTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 3)
+                {
+                    ButtonText.text = EarthTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 4)
+                {
+                    ButtonText.text = WaterTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 5)
+                {
+                    ButtonText.text = AetherTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 6)
+                {
+                    ButtonText.text = ChaosTextChinese;
+                }
+                else if (PlayerPrefs.GetInt("RightColor") == 7)
+                {
+                    ButtonText.text = OrderTextChinese;
+                }
             }
         }
         SpriteRend = GetComponent<SpriteRenderer>();
@@ -230,62 +315,123 @@ public class ColorChangeButton : MonoBehaviour
                 Sine4.Started = false;
                 Sine5.Started = false;
 
-                
-                if (Point1.IsRainbow)
+                if (!Chinese)
                 {
-                    Point1.IsRainbow = false;
-                    Point1.IsFire = true;
-                    ButtonText.text = FireText;
-                    SaveColor(1);
+                    if (Point1.IsRainbow)
+                    {
+                        Point1.IsRainbow = false;
+                        Point1.IsFire = true;
+                        ButtonText.text = FireText;
+                        SaveColor(1);
+                    }
+                    else if (Point1.IsFire)
+                    {
+                        Point1.IsFire = false;
+                        Point1.IsAir = true;
+                        ButtonText.text = AirText;
+                        SaveColor(2);
+                    }
+                    else if (Point1.IsAir)
+                    {
+                        Point1.IsAir = false;
+                        Point1.IsEarth = true;
+                        ButtonText.text = EarthText;
+                        SaveColor(3);
+                    }
+                    else if (Point1.IsEarth)
+                    {
+                        Point1.IsEarth = false;
+                        Point1.IsWater = true;
+                        ButtonText.text = WaterText;
+                        SaveColor(4);
+                    }
+                    else if (Point1.IsWater)
+                    {
+                        Point1.IsWater = false;
+                        Point1.IsAether = true;
+                        ButtonText.text = AetherText;
+                        SaveColor(5);
+                    }
+                    else if (Point1.IsAether)
+                    {
+                        Point1.IsAether = false;
+                        Point1.IsDark = true;
+                        ButtonText.text = ChaosText;
+                        SaveColor(6);
+                    }
+                    else if (Point1.IsDark)
+                    {
+                        Point1.IsDark = false;
+                        Point1.IsLight = true;
+                        ButtonText.text = OrderText;
+                        SaveColor(7);
+                    }
+                    else if (Point1.IsLight)
+                    {
+                        Point1.IsLight = false;
+                        Point1.IsRainbow = true;
+                        ButtonText.text = RainbowText;
+                        SaveColor(0);
+                    }
                 }
-                else if (Point1.IsFire)
+                else if (Chinese)
                 {
-                    Point1.IsFire = false;
-                    Point1.IsAir = true;
-                    ButtonText.text = AirText;
-                    SaveColor(2);
-                }
-                else if (Point1.IsAir)
-                {
-                    Point1.IsAir = false;
-                    Point1.IsEarth = true;
-                    ButtonText.text = EarthText;
-                    SaveColor(3);
-                }
-                else if (Point1.IsEarth)
-                {
-                    Point1.IsEarth = false;
-                    Point1.IsWater = true;
-                    ButtonText.text = WaterText;
-                    SaveColor(4);
-                }
-                else if (Point1.IsWater)
-                {
-                    Point1.IsWater = false;
-                    Point1.IsAether = true;
-                    ButtonText.text = AetherText;
-                    SaveColor(5);
-                }
-                else if (Point1.IsAether)
-                {
-                    Point1.IsAether = false;
-                    Point1.IsDark = true;
-                    ButtonText.text = ChaosText;
-                    SaveColor(6);
-                }
-                else if (Point1.IsDark)
-                {
-                    Point1.IsDark = false;
-                    Point1.IsLight = true;
-                    ButtonText.text = OrderText;
-                    SaveColor(7);
-                }
-                else if (Point1.IsLight)
-                {
-                    Point1.IsLight = false;
-                    Point1.IsRainbow = true;
-                    ButtonText.text = RainbowText;
-                    SaveColor(0);
+                    if (Point1.IsRainbow)
+                    {
+                        Point1.IsRainbow = false;
+                        Point1.IsFire = true;
+                        ButtonText.text = FireTextChinese;
+                        SaveColor(1);
+                    }
+                    else if (Point1.IsFire)
+                    {
+                        Point1.IsFire = false;
+                        Point1.IsAir = true;
+                        ButtonText.text = AirTextChinese;
+                        SaveColor(2);
+                    }
+                    else if (Point1.IsAir)
+                    {
+                        Point1.IsAir = false;
+                        Point1.IsEarth = true;
+                        ButtonText.text = EarthTextChinese;
+                        SaveColor(3);
+                    }
+                    else if (Point1.IsEarth)
+                    {
+                        Point1.IsEarth = false;
+                        Point1.IsWater = true;
+                        ButtonText.text = WaterTextChinese;
+                        SaveColor(4);
+                    }
+                    else if (Point1.IsWater)
+                    {
+                        Point1.IsWater = false;
+                        Point1.IsAether = true;
+                        ButtonText.text = AetherTextChinese;
+                        SaveColor(5);
+                    }
+                    else if (Point1.IsAether)
+                    {
+                        Point1.IsAether = false;
+                        Point1.IsDark = true;
+                        ButtonText.text = ChaosTextChinese;
+                        SaveColor(6);
+                    }
+                    else if (Point1.IsDark)
+                    {
+                        Point1.IsDark = false;
+                        Point1.IsLight = true;
+                        ButtonText.text = OrderTextChinese;
+                        SaveColor(7);
+                    }
+                    else if (Point1.IsLight)
+                    {
+                        Point1.IsLight = false;
+                        Point1.IsRainbow = true;
+                        ButtonText.text = RainbowTextChinese;
+                        SaveColor(0);
+                    }
                 }
                 Point1.ColorIndex = ColorIndex1;
                 Point2.ColorIndex = ColorIndex2;

@@ -6,12 +6,19 @@ using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Advertisements;
 
 public class GameOverText : MonoBehaviour {
-	public bool Fade;
 
-	private InterstitialAd interstitial; 
-	private bool AdShowing;
+
+    public bool CHINABUILD;
+    public bool AcceptedTerms;
+    public bool Fade;
+	private InterstitialAd interstitial;
+    //unityAds
+    public string placementId = "interstitial";
+    public string gameId = "3429659";
+    private bool AdShowing;
 	private bool IsOn;
 	private bool BannerOn;
     public Color Alpha;
@@ -28,19 +35,35 @@ public class GameOverText : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
-		interstitial = new InterstitialAd("ca-app-pub-5851146300950261/9743770233");
-		AdRequest request = new AdRequest.Builder().Build();
-		// Load the interstitial with the request.
-		interstitial.LoadAd(request);
-		
-		// Load the interstitial with the request.
+        if (PlayerPrefs.GetInt("AcceptedTerms") == 0)
+        {
+            SceneManager.LoadScene("Terms China", LoadSceneMode.Single);
+        }
+
+        
+
+        if (CHINABUILD)
+        {
+            Advertisement.Initialize(gameId, false);
+        }
+        else if (!CHINABUILD)
+        {
+            interstitial = new InterstitialAd("ca-app-pub-5851146300950261/9167429037");
+            AdRequest request = new AdRequest.Builder().Build();
+            interstitial.LoadAd(request);
+        }
 	
 		text = GetComponent<TextMeshProUGUI>();
 
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Start()
+    {
+ 
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         Lost = Controller.Lost;
 			
@@ -48,7 +71,9 @@ public class GameOverText : MonoBehaviour {
         {
             text.enabled = true;
 			StartCoroutine("TextFadeIn");
-		}
+            optionsButton.enabled = false;
+
+        }
 	
 		if(Fade)
         {
@@ -78,8 +103,17 @@ public class GameOverText : MonoBehaviour {
             }
 		}
 	}
+    IEnumerator ShowAd()
+    {
+        yield return new WaitForSeconds(1);
+        if (Advertisement.IsReady(placementId))
+        {
+            Advertisement.Show(placementId);
+        }
+        else { StartCoroutine(ShowAd()); }
+    }
 
-	IEnumerator TextFadeIn ()
+    IEnumerator TextFadeIn ()
     {
         FadeStart = true;
         yield return new WaitForSeconds(1);
@@ -99,7 +133,37 @@ public class GameOverText : MonoBehaviour {
                 interstitial.Show();
             }
         }
-#else
+#elif NO_GPGS
+        
+
+        // unityAds
+        if (CHINABUILD)
+        {
+            SceneManager.LoadScene("Android China", LoadSceneMode.Single);
+            if (AdSwapper.Show)
+            {
+                Debug.Log("HEY");
+                if (Advertisement.IsReady(placementId))
+                {
+                    Advertisement.Show(placementId);
+                }
+                else { StartCoroutine(ShowAd()); }
+            }
+        }
+        // admob
+        if (!CHINABUILD)
+        {
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+            if (AdSwapper.Show)
+            {
+                if (interstitial.IsLoaded())
+                {
+                    interstitial.Show();
+                }
+            }
+        }
+        
+#elif UNITY_IOS
 		SceneManager.LoadScene("iOS", LoadSceneMode.Single);
          if (AdSwapper.Show)
         {
@@ -113,4 +177,6 @@ public class GameOverText : MonoBehaviour {
 
 
     }
+
+
 }

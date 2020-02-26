@@ -15,10 +15,11 @@ public class ScoreCounter : MonoBehaviour {
 	private string Achievement5000 = "CgkIlu2Nm5MWEAIQBg";
 	public int Score;
 	public static bool Winner;
+    public HighScoreText highScoreText;
+    public LoadSave loadSave;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         //	controller = Controller.GetComponent<Controller>();
         text = GetComponent<TextMeshProUGUI>();
         InvokeRepeating("AddOne", 0, .1f);
@@ -35,21 +36,36 @@ public class ScoreCounter : MonoBehaviour {
 
 	void StoreHighscore(int newHighScore)
 	{
-		int oldHighscore = PlayerPrefs.GetInt("highscore", 0);    
-		if(newHighScore > oldHighscore)
-			PlayerPrefs.SetInt("highscore", newHighScore);
-        #if !NO_GPGS
-		Social.ReportScore(newHighScore, "CgkIlu2Nm5MWEAIQBw", (bool success) => {
-		});
+        
+		int oldHighscore = PlayerPrefs.GetInt("highscore");
+        if (newHighScore > oldHighscore)
+        {
+            PlayerPrefs.SetInt("highscore", newHighScore);
+            highScoreText.UpdateHighscoreText();
+#if !NO_GPGS
+            
+            Social.ReportScore(newHighScore, "CgkIlu2Nm5MWEAIQCQ", (bool success) =>
+            {
+            });         
 #endif
+        }
 
-	}
-	// Update is called once per frame
-	void Update () {
+
+#if !NO_GPGS
+        if (PlayerPrefs.GetInt("CloudSave") == 0)
+        {
+            loadSave.OpenSave(true);
+        }
+#endif
+    }
+    // Update is called once per frame
+    void Update () {
 		if(Controller.Lost){
 			StoreHighscore(Score);
-        #if !NO_GPGS
-		if(Score >= 100 && Score < 500){
+            
+
+#if !NO_GPGS
+            if (Score >= 100 && Score < 500){
 
 
 

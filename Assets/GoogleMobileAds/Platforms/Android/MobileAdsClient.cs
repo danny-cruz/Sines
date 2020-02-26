@@ -14,17 +14,18 @@
 
 #if UNITY_ANDROID
 
+using System;
 using UnityEngine;
 
+using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Android
 {
-    public class MobileAdsClient : IMobileAdsClient
+    public class MobileAdsClient :
+    IMobileAdsClient
     {
         private static MobileAdsClient instance = new MobileAdsClient();
-
-        private MobileAdsClient(){}
 
         public static MobileAdsClient Instance
         {
@@ -41,6 +42,22 @@ namespace GoogleMobileAds.Android
                     playerClass.GetStatic<AndroidJavaObject>("currentActivity");
             AndroidJavaClass mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
             mobileAdsClass.CallStatic("initialize", activity, appId);
+        }
+        public void SetApplicationVolume(float volume)
+        {
+            AndroidJavaClass mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
+            mobileAdsClass.CallStatic("setAppVolume", volume);
+        }
+
+        public void SetApplicationMuted(bool muted)
+        {
+            AndroidJavaClass mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
+            mobileAdsClass.CallStatic("setAppMuted", muted);
+        }
+
+        public void SetiOSAppPauseOnBackground(bool pause)
+        {
+            // Do nothing on Android. Default behavior is to pause when app is backgrounded.
         }
     }
 }

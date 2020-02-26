@@ -53,7 +53,7 @@ public class UI_ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         targetImageColor = ImageColorHold;
         targetTextColor = TextColorHold;
         myImage.transform.localScale = imageScaleDefault * .98f;
-        myText.transform.localScale = textScaleDefault * .98f;
+        //myText.transform.localScale = textScaleDefault * .98f;
     }
 
     public void OnPointerExit(PointerEventData eventData)

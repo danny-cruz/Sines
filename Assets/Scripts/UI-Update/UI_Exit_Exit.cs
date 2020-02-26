@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UI_Exit_Exit : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
 {
-    public UI_ExitButton exitButton;
+    public UI_MenuButton exitButton;
     private bool hasExited;
     void Start()
     {

@@ -44,6 +44,10 @@ public class UI_Exit_Restart : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     IEnumerator Restart ()
     {
         yield return new WaitForSeconds(.5f);
+#if !NO_GPGS
         SceneManager.LoadScene("Android", LoadSceneMode.Single);
+#elif NO_GPGS
+        SceneManager.LoadScene("Android China", LoadSceneMode.Single);
+#endif
     }
 }

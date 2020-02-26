@@ -10,13 +10,19 @@ public class ColorCopy : MonoBehaviour {
     public bool Radial;
     public bool StartSprite;
 
-	// Use this for initialization
-	void Start () {
-		SpriteRend = GetComponent<SpriteRenderer>();
-		ColorC = Parent.GetComponent<ColorChange>();
-
-	}
-	
+    // Use this for initialization
+    void Start()
+    {
+        SpriteRend = GetComponent<SpriteRenderer>();
+        ColorC = Parent.GetComponent<ColorChange>();
+        if ((ColorC.IsDark || ColorC.IsLight) && Radial)
+        {
+            if (!StartSprite)
+            {
+                SpriteRend.color = Alpha;
+            }
+        }
+    }
 	// Update is called once per frame
 	void Update ()
     {
@@ -33,11 +39,18 @@ public class ColorCopy : MonoBehaviour {
             {
                 if (!StartSprite)
                 {
-                    LerpColor = ColorC.LerpColor;
+                    if (!Radial && ColorC.Begin)
+                    {
+                        LerpColor = Alpha;
+                    }
+                    else
+                    {
+                        LerpColor = ColorC.LerpColor;
+                    }
                 }
                 else if (ColorC.Begin)
                 {
-                    LerpColor = ColorC.LerpColor;
+                    LerpColor = Color.Lerp(ColorC.LerpColor, ColorC.TargetColor, Time.deltaTime * 4);
                 }
             }
         }

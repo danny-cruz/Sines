@@ -34,7 +34,7 @@ public class Fade : MonoBehaviour
         if (FadeAlpha)
         {
             FadeBlack = false;
-            image.color = Color.Lerp(image.color, Alpha, Time.deltaTime * 3);
+            image.color = Color.Lerp(image.color, Alpha, Time.deltaTime * 2);
 	    }    
 	}
 

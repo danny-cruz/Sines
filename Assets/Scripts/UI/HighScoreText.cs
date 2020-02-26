@@ -2,9 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 
 public class HighScoreText : MonoBehaviour {
+    public static HighScoreText Instance { get; private set; }
     TextMeshProUGUI text;
+    public bool Chinese;
 	public Color Alpha;
 	public Color Gray;
 	public float Speed;
@@ -17,15 +22,19 @@ public class HighScoreText : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		controller = ControllerObject.GetComponent<Controller>();
+        Instance = this;
+        controller = ControllerObject.GetComponent<Controller>();
         text = GetComponent<TextMeshProUGUI>();
         myAnimator = GetComponent<Animator>();
+        UpdateHighscoreText();
     }
 	
 
 	// Update is called once per frame
 	void Update ()
     {
+      
+    
         /*
         if (GameOver.Fade)
         {
@@ -54,6 +63,19 @@ public class HighScoreText : MonoBehaviour {
             myAnimator.SetTrigger("Lost");
         }
 
-        text.text = "High Score: " + PlayerPrefs.GetInt("highscore", 0);
+        if (!Chinese)
+        {
+            text.text = "High Score: " + PlayerPrefs.GetInt("highscore");
+        }
+        else if (Chinese)
+        {
+            text.text = "高分: " + PlayerPrefs.GetInt("highscore");
+        }
 	}
+
+    public void UpdateHighscoreText()
+    {
+
+        //text.text = "High Score: " + PlayerPrefs.GetInt("highscore");
+    }
 }

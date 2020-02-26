@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
 {
+    public ReturnToPrivacyPolicyButton PrivacyLogo;
     public OptionsButton optionsButton;
     public Controller controller;
     public Animator highScoreTextAnimator;
@@ -13,6 +14,9 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     public GameObject Menu;
 
     public Animator circleAnimator;
+    public Animator ellipsisAnimator0, ellipsisAnimator1, ellipsisAnimator2;
+    public Animator x0, x1, x2, x3;
+    public Animator xLine0, xLine1;
     private Button myButton;
 
     public CanvasGroup ImageGroup;
@@ -51,10 +55,43 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
         }
         highScoreTextAnimator.SetBool("isOpen", Open);
         circleAnimator.SetBool("isOpen", Open);
+        ellipsisAnimator0.SetBool("isOpen", Open);
+        ellipsisAnimator1.SetBool("isOpen", Open);
+        ellipsisAnimator2.SetBool("isOpen", Open);
+        x0.SetBool("isOpen", Open);
+        x1.SetBool("isOpen", Open);
+        x2.SetBool("isOpen", Open);
+        x3.SetBool("isOpen", Open);
+        xLine0.SetBool("isOpen", Open);
+        xLine1.SetBool("isOpen", Open);
         circleAnimator.SetTrigger("click");
     }
     void Update () 
 	{
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StopAllCoroutines();
+            if (!Open)
+            {
+                OpenMenu();
+            }
+            else if (Open)
+            {
+                CloseMenu();
+            }
+            highScoreTextAnimator.SetBool("isOpen", Open);
+            circleAnimator.SetBool("isOpen", Open);
+            ellipsisAnimator0.SetBool("isOpen", Open);
+            ellipsisAnimator1.SetBool("isOpen", Open);
+            ellipsisAnimator2.SetBool("isOpen", Open);
+            x0.SetBool("isOpen", Open);
+            x1.SetBool("isOpen", Open);
+            x2.SetBool("isOpen", Open);
+            x3.SetBool("isOpen", Open);
+            xLine0.SetBool("isOpen", Open);
+            xLine1.SetBool("isOpen", Open);
+            circleAnimator.SetTrigger("click");
+        }
 
         if(ImageGroup.alpha != menuTargetAlpha)
         {
@@ -73,6 +110,7 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     {
         Pause = true;
         Open = true;
+        
         ButtonGroup.enabled = true;
         StartCoroutine("OnPause");
     }
@@ -80,7 +118,9 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     {
         Open = false;
         menuTargetAlpha = 0;
+        PrivacyLogo.Enabled = false;
         ButtonGroup.enabled = false;
+
         if (controller.Begin)
         {
             StartCoroutine("Unpause", .75f);
@@ -94,12 +134,17 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     IEnumerator Unpause(float Delay)
     {
         yield return new WaitForSeconds(Delay);
+
         Pause = false;
 
     }
     IEnumerator OnPause ()
     {
         yield return new WaitForSeconds(.2f);
+        if (!controller.Begin)
+        {
+            PrivacyLogo.Enabled = true;
+        }
         menuTargetAlpha = 1;
     }
 }

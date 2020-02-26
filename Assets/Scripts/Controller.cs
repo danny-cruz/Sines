@@ -56,6 +56,7 @@ public class Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+   
 		Lost = false;
 		FirstSpin = true;
         Pause = false;
