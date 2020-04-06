@@ -118,10 +118,7 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     {
         Open = false;
         menuTargetAlpha = 0;
-        if (GameOverText.CHINABUILD)
-        {
-            PrivacyLogo.Enabled = false;
-        }
+        PrivacyLogo.Enabled = false;
         ButtonGroup.enabled = false;
 
         if (controller.Begin)
@@ -146,10 +143,7 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
         yield return new WaitForSeconds(.2f);
         if (!controller.Begin)
         {
-            if (GameOverText.CHINABUILD)
-            {
-                PrivacyLogo.Enabled = true;
-            }
+            PrivacyLogo.Enabled = true;
         }
         menuTargetAlpha = 1;
     }
