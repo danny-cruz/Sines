@@ -11,7 +11,7 @@ using UnityEngine.Advertisements;
 public class GameOverText : MonoBehaviour {
 
 
-    public bool CHINABUILD;
+    public static bool CHINABUILD;
     public bool AcceptedTerms;
     public bool Fade;
 	private InterstitialAd interstitial;
@@ -44,7 +44,7 @@ public class GameOverText : MonoBehaviour {
 
         if (CHINABUILD)
         {
-            Advertisement.Initialize(gameId, false);
+            
         }
         else if (!CHINABUILD)
         {
@@ -57,9 +57,9 @@ public class GameOverText : MonoBehaviour {
 
 	}
 
-    private void Start()
-    {
- 
+    void Start()
+    {   
+
     }
 
     // Update is called once per frame
@@ -103,6 +103,7 @@ public class GameOverText : MonoBehaviour {
             }
 		}
 	}
+    /*
     IEnumerator ShowAd()
     {
         yield return new WaitForSeconds(1);
@@ -112,7 +113,7 @@ public class GameOverText : MonoBehaviour {
         }
         else { StartCoroutine(ShowAd()); }
     }
-
+    */
     IEnumerator TextFadeIn ()
     {
         FadeStart = true;
@@ -134,9 +135,11 @@ public class GameOverText : MonoBehaviour {
             }
         }
 #elif NO_GPGS
+
         
 
         // unityAds
+        /*
         if (CHINABUILD)
         {
             SceneManager.LoadScene("Android China", LoadSceneMode.Single);
@@ -150,6 +153,7 @@ public class GameOverText : MonoBehaviour {
                 else { StartCoroutine(ShowAd()); }
             }
         }
+        */
         // admob
         if (!CHINABUILD)
         {

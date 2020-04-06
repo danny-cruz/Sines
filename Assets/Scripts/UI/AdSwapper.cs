@@ -9,7 +9,7 @@ public class AdSwapper : MonoBehaviour {
     public bool AdFree;
 	// Use this for initialization
 	void Awake () {
-
+        Show = true;
 #if NO_GPGS
 
         
@@ -22,12 +22,12 @@ public class AdSwapper : MonoBehaviour {
         }
         if (PlayerPrefs.GetInt("highscore") < 150)
         {
-            Show = false;
+           // Show = false;
 
         }
         else if (PlayerPrefs.GetInt("highscore") >= 150)
         {
-            Show = !Show;
+            //Show = !Show;
 
         }
         /*
@@ -39,7 +39,8 @@ public class AdSwapper : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+        Debug.Log("Show = " + Show + " HS = " + (PlayerPrefs.GetInt("highscore")));
 	}
 }
