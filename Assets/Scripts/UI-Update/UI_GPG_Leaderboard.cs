@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class UI_GPG_Leaderboard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
 {

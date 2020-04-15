@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Android.unity
     guid: 3537a26414bcb6446b822c46c9dcfa93
   - enabled: 0
@@ -20,9 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/UI.unity
     guid: f43a33701a4abaa4fb4aeb91311abd31
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Android China.unity
     guid: 67cf46c381d852442a1028ba495623fc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Terms China.unity
     guid: 716fa1469ce6d8444a6789fdd73df86f
+  m_configObjects: {}

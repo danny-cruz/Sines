@@ -11,7 +11,7 @@ using UnityEngine.Advertisements;
 public class GameOverText : MonoBehaviour {
 
 
-    public static bool CHINABUILD;
+    public bool CHINABUILD;
     public bool AcceptedTerms;
     public bool Fade;
 	private InterstitialAd interstitial;
@@ -35,11 +35,12 @@ public class GameOverText : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
+        /*
         if (PlayerPrefs.GetInt("AcceptedTerms") == 0)
         {
             SceneManager.LoadScene("Terms China", LoadSceneMode.Single);
         }
-
+        */
         
 
         if (CHINABUILD)

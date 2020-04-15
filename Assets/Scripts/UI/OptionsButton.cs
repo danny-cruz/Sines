@@ -25,7 +25,7 @@ public class OptionsButton : MonoBehaviour {
 	public Controller controller;
 	public bool FlowLevel;
 	public bool ArcadeLevel;
-	public ResetButton NotMode;
+	//public ResetButton NotMode;
 	private Vector3 TargetScale;
 	private Vector3 StartScale;
 	private bool ShadowDelay;

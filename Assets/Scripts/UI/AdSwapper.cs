@@ -7,27 +7,28 @@ public class AdSwapper : MonoBehaviour {
 	public static bool Show;
 	public static bool HideBanner;
     public bool AdFree;
-	// Use this for initialization
-	void Awake () {
-        Show = true;
-#if NO_GPGS
-
-        
-#else
+    // Use this for initialization
+    void Awake()
+    {
         Application.targetFrameRate = 60;
-#endif
+    }
+
+    void Start()
+    {
+        
+    
         if (AdFree)
         {
             return;
         }
         if (PlayerPrefs.GetInt("highscore") < 150)
         {
-           // Show = false;
+            Show = false;
 
         }
         else if (PlayerPrefs.GetInt("highscore") >= 150)
         {
-            //Show = !Show;
+            Show = !Show;
 
         }
         /*
@@ -41,6 +42,6 @@ public class AdSwapper : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("Show = " + Show + " HS = " + (PlayerPrefs.GetInt("highscore")));
+        Debug.Log(Show + " / " + PlayerPrefs.GetInt("highscore"));
 	}
 }

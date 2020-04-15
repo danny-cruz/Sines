@@ -12,7 +12,7 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     public Animator highScoreTextAnimator;
 
     public GameObject Menu;
-
+    public GameOverText GameOver;
     public Animator circleAnimator;
     public Animator ellipsisAnimator0, ellipsisAnimator1, ellipsisAnimator2;
     public Animator x0, x1, x2, x3;
@@ -118,7 +118,7 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
     {
         Open = false;
         menuTargetAlpha = 0;
-        if (GameOverText.CHINABUILD)
+        if (GameOver.CHINABUILD)
         {
             PrivacyLogo.Enabled = false;
         }
@@ -146,7 +146,7 @@ public class UI_OptionsButton : MonoBehaviour, IPointerDownHandler
         yield return new WaitForSeconds(.2f);
         if (!controller.Begin)
         {
-            if (GameOverText.CHINABUILD)
+            if (GameOver.CHINABUILD)
             {
                 PrivacyLogo.Enabled = true;
             }

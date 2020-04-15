@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
@@ -75,7 +74,6 @@ public class LoadSave : MonoBehaviour
     private bool isSaving = false;
     public void OpenSave(bool saving)
     {
-        Debug.Log("Open Save");
 
         if(Social.localUser.authenticated)
         {
