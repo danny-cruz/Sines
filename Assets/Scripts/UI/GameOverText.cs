@@ -7,6 +7,7 @@ using GoogleMobileAds.Api;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Advertisements;
+using GoogleMobileAds.Api.Mediation.AppLovin;
 
 public class GameOverText : MonoBehaviour {
 
@@ -41,20 +42,16 @@ public class GameOverText : MonoBehaviour {
             SceneManager.LoadScene("Terms China", LoadSceneMode.Single);
         }
         */
-        
 
-        if (CHINABUILD)
-        {
-            
-        }
-        else if (!CHINABUILD)
-        {
-            interstitial = new InterstitialAd("ca-app-pub-5851146300950261/9167429037");
-            AdRequest request = new AdRequest.Builder().Build();
-            interstitial.LoadAd(request);
-        }
-	
-		text = GetComponent<TextMeshProUGUI>();
+        interstitial = new InterstitialAd("ca-app-pub-5851146300950261/9167429037");
+        AdRequest request = new AdRequest.Builder().Build();
+        interstitial.LoadAd(request);
+
+        AppLovin.Initialize();
+
+
+
+        text = GetComponent<TextMeshProUGUI>();
 
 	}
 

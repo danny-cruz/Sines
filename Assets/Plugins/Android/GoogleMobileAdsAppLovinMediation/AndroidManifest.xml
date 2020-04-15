@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.google.unity.mediation.AppLovin">
+
+    <application>
+        <!-- See https://developers.google.com/admob/unity/mediation/applovin#manage_apps
+            for instructions on how to set AppLovin's SDK key. -->
+        <meta-data
+            android:name="applovin.sdk.key"
+            android:value="lPy-ZTWTTXTBednAq3EBWpqLfRv9UyPa5oJOBNF9klMwTBtXeR0cIyrt7G7gOrQOWOsxVLAHCb51A_xT8WybIp" />
+    </application>
+</manifest>

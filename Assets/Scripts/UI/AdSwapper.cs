@@ -42,6 +42,6 @@ public class AdSwapper : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(Show + " / " + PlayerPrefs.GetInt("highscore"));
+
 	}
 }
